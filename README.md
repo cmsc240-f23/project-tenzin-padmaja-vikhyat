@@ -8,8 +8,9 @@ See course web page [Project: C++ Web Service](https://cmsc240-f23.github.io/pro
 
 #### Write your group members names below:
 
-1.
-2.
+1. Tenzin Tsekyi
+2. Padmaja Karki
+3. Vikhyat Agarwal
 
 ## Project Proposal
 
