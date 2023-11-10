@@ -14,5 +14,5 @@ See course web page [Project: C++ Web Service](https://cmsc240-f23.github.io/pro
 
 ## Project Proposal
 
-Write your project proposal here...
+The web service will be used to operate a cat cafe where customers can spend time with cats, get food/drinks for themselves or for the cats, buy merch/toys, and also adopt rescued cats.
 
