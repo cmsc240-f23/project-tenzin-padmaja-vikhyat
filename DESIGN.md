@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The web service will be used to operate a cat cafe where customers can spend time with cats, get food/drinks for themselves or for the cats, buy merch/toys, and also adopt rescued cats.
+The web service will be used to operate a cat cafe where customers can buy different food,drinks, and products for themselves or for the cats, and they can also inquire about and adopt rescued cats.
 
 ## Background/Context
 
