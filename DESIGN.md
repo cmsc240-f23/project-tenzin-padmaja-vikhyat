@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The web service will be used to operate a cat cafe where customers can buy different food,drinks, and products for themselves or for the cats, and they can also inquire about and adopt rescued cats.
+The web service will be used to operate a cat cafe where customers can spend time with cats, get food/drinks for themselves or for the cats, buy merch/toys, and also adopt rescued cats.
 
 ## Background/Context
 
@@ -10,9 +10,9 @@ The web service is designed to address the interest in cat adoption and catering
 
 Cat cafes are becoming an increasingly popular type of cafe: they allow visitors to come play with cats sheltered by the cafe, eat and drink at the cafe, buy merch, and also potentially adopt the cats. These cafes process hundreds of transactions everyday, and must maintain information on all their cats, since potential adopters would ask for these details. 
 
-Hence, there is the need for an application which the cashier (/frontdesk employee) can use to track purchases and cat information. Since storing these details on just one local machine can be risky due to potential hardware failure, it’s beneficial (and often more technologically efficient) to have a cloud server that’s running a web service that stores all the relevant data. The frontdesk employee computer can be connected to the internet so that it communicates with this web service, sending HTTP requests and receiving HTTP responses that communicate the necessary data and actions.
+Hence, there is the need for an application which the cashier (/frontdesk employee) can use to track purchases and cat information. Storing all this data on just one local machine can be unreliable (due to potential hardware failure or security breach), so it’s beneficial to have a cloud server that stores all the relevant data, along with a web service that can fetch or modify this data. The frontdesk employee computer can be connected to the internet so that it communicates with this web service, sending HTTP requests and receiving HTTP responses that communicate the necessary data and actions.
 
-This is the problem we hope to tackle, in particular by designing and eventually implementing the web service that would be hosted
+This is the problem we hope to tackle, in particular by creating the web service that would be hosted on a cloud server. The scope of our project will not include the frontend POS (point of sale) client-side application that the employees would use to interact with this web service.
 
 ## Stakeholders
 
@@ -20,36 +20,49 @@ Visiting customers, potential cat adopters, frontdesk employees, and the cafe ow
 
 ## Functional Requirements
 
-The web service will contain bio data on different cats available for adoption and for cat cafe sessions. Users will be able to purchase food and drinks for themselves and for the cats. They can buy cat toys and merch and can also choose to donate to the cafe’s rescue team so they can provide for the rescued cats.
+Note: ‘client’ hereafter refers to the frontdesk computer that makes requests to our web service
+
+The web service will:
+- Provide the client a particular cat’s stored details, given the cat’s ID by client
+- Provide the client a list of all existing cats
+- Receive (from client) and store details of donations made by customers
+- Receive (from client) and store details of cats rescued and added to cafe
+- Review and accept/reject requests (from client) to adopt a cat; remove cat data if successful
+- Receive (from client) and store details of transactions made at the cafe
+- Recall details of transactions made, given the transaction ID by client
 
 ## Use Case Description
 
-Describe all the interactions between users and the system. This can be in the form of user stories. For example, “As a customer, I want to view book reviews and ratings before purchasing, so that I can make informed decisions.”
+The client can fetch the list of all existing cats, particularly their names and IDs.
+If a customer asks for more info about a particular cat, the client can fetch all the specific details for that particular cat using its ID.
+If the customer wants to adopt the cat, the client can request an adoption for that client, which will get approved if the cat is adoptable.
+Customers can choose to donate to the cafe’s funds.
+Customers can place orders (known as transactions) that contain multiple items like foods, drinks, products (merch/toys).
 
 ## List Of Resources
 
 | Resource | Description |
 | :---: | :--- |
 | Cafe         | cafe’s information like name, address, donations, transactions, and availability of drinks, food, and cats |
-| Cat          | provides a list of cats with their info. It also allows customers to adopt cats. |
+| Cat          | provides a list of cats with their info (name, breed, age, adoptability, ...). It also allows customers to adopt cats. |
 | Products     | list of products available for purchase, including cat toys and merch |
-| Transactions | information about transaction like timestamp, items, qty.s and info about customer like name, email, phone number and membership |
+| Customer     | information about customer like name, email, phone number, membership status |
+| Transactions | information about transaction like timestamp, items, qty.s, total and customer ID |
 | Drinks       | drinks options and the prices associated with it |
 | Food         | food options and the prices associated with it |
 
-
-
 ## List of End Points
 
-| Endpoint URL | HTTP Method | Expected Response | Error Status
-| :---: | :---: | :---: | :---: |
-| api/cat/<string>         | GET                      | Body: JSON representation of cat info , Status: 200 OK          | 404 for not found cat with given ID |
-| api/cats                 | GET                      | Body: JSON array of cat info          , Status: 200 OK          | |
-| api/donate               | POST                     | Body: Confirmation message, Status: 201 Created                 | |
-| api/cat                  | PUT (after rescue)       | Body: JSON representation of cat info, Status: 201 created      | |
-| api/cat                  | DELETE (after adoption)  | Body: Confirmation message                                      | |
-| api/transaction          | POST (new transaction)   | Body: receipt for transaction, Status: 201 Created              | |
-| api/transaction/<string> | GET (recall transaction) | Body: receipt for transaction, Status: 200 OK                   | 404 for not found transaction with given ID |
+| Endpoint URL | HTTP Method | Request Body | Expected Response | Error Status
+| :---: | :---: | :---: | :---: | :---: |
+| api/cat/<string>         | GET                      |TBA..| Body: JSON representation of cat info , Status: 200 OK          | 404 for not found cat with given ID |
+| api/cats                 | GET                      || Body: JSON array of cat info          , Status: 200 OK          | |
+| api/donate               | POST                     || Body: Confirmation message, Status: 201 Created                 | |
+| api/cat                  | PUT (after rescue)       || Body: JSON representation of cat info, Status: 201 created      | |
+| api/cat                  | DELETE (after adoption)  || Body: Confirmation message                                      | |
+| api/transactions          | POST (new transaction)   || Body: receipt for transaction, Status: 201 Created              | |
+| api/transactions/\<string\> | GET (recall transaction) || Body: receipt for transaction, Status: 200 OK                   | 404 for not found transaction with given ID |
+| api/transactions/ | GET (recall transactions in date range) | date range | Body: transactions in given range, Status: 200 OK                   | |
 
 ## UML Diagrams
 https://lucid.app/lucidchart/e911c24f-67c7-4dc6-ae56-0fa3b6845f79/edit?viewport_loc=-11%2C-11%2C1365%2C613%2C0_0&invitationId=inv_bc88ed82-1500-4f1f-9d53-81b338255736 
