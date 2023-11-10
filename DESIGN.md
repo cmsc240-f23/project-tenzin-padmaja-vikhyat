@@ -49,57 +49,15 @@ This resource keeps information about the food options and the prices associated
 
 ## List of End Points
 
-Endpoint URL
-HTTP Method
-Expected Response
-Error Status
-api/cat/<string>
-GET
-Body: JSON representation of cat info
-
-Status: 200 OK
-
-404 for not found cat with given ID
-api/cats
-GET
-Body: JSON array of cat info
-
-Status: 200 OK
-
-
-api/donate
-POST
-Body: Confirmation message
-
-Status: 201 Created 
-
-
-api/cat
-PUT
-(after rescue)
-Body: JSON representation of cat info
-201 created
-api/cat 
-DELETE
-(after adoption)
-Confirmation message
-
-
-api/transaction
-POST
-(new transaction)
-Body: receipt for transaction
-
-Status: 201 Created
-
-
-api/transaction/<string>
-GET
-(recall transaction)
-Body: receipt for transaction
-
-Status: 200 OK
-404 for not found transaction with given ID
+| Endpoint URL | HTTP Method | Expected Response | Error Status
+| --- | --- | --- | --- |
+| api/cat/<string>         | GET                      | Body: JSON representation of cat info , Status: 200 OK          | 404 for not found cat with given ID |
+| api/cats                 | GET                      | Body: JSON array of cat info          , Status: 200 OK          | |
+| api/donate               | POST                     | Body: Confirmation message, Status: 201 Created                 | |
+| api/cat                  | PUT (after rescue)       | Body: JSON representation of cat info, Status: 201 created      | |
+| api/cat                  | DELETE (after adoption)  | Body: Confirmation message                                      | |
+| api/transaction          | POST (new transaction)   | Body: receipt for transaction, Status: 201 Created              | |
+| api/transaction/<string> | GET (recall transaction) | Body: receipt for transaction, Status: 200 OK                   | 404 for not found transaction with given ID |
 
 ## UML Diagrams
 https://lucid.app/lucidchart/e911c24f-67c7-4dc6-ae56-0fa3b6845f79/edit?viewport_loc=-11%2C-11%2C1365%2C613%2C0_0&invitationId=inv_bc88ed82-1500-4f1f-9d53-81b338255736 
