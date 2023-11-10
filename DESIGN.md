@@ -28,9 +28,78 @@ Describe all the interactions between users and the system. This can be in the f
 
 ## List Of Resources
 
+Resource
+Description
+Cafe
+This resource has the cafe’s information like the name of the cafe, address, donations, customers, drinks, food and cats
+Cat 
+This resource provides a list of cats with their info. It also allows customers to adopt cats.
+Order
+This resource provides a list of foods and drinks available for cats and customers
+Cat Products
+This resource provides a list of cat products available for purchase, including cat toys and merch
+Customers
+This resource provides information about customers like their name, email, phone number and if they are a member or not.
+Drinks
+This resource keeps information about the drinks options and the prices associated with it.
+Food
+This resource keeps information about the food options and the prices associated with it.
+
+
 
 ## List of End Points
 
+Endpoint URL
+HTTP Method
+Expected Response
+Error Status
+api/cat/<string>
+GET
+Body: JSON representation of cat info
+
+Status: 200 OK
+
+404 for not found cat with given ID
+api/cats
+GET
+Body: JSON array of cat info
+
+Status: 200 OK
+
+
+api/donate
+POST
+Body: Confirmation message
+
+Status: 201 Created 
+
+
+api/cat
+PUT
+(after rescue)
+Body: JSON representation of cat info
+201 created
+api/cat 
+DELETE
+(after adoption)
+Confirmation message
+
+
+api/transaction
+POST
+(new transaction)
+Body: receipt for transaction
+
+Status: 201 Created
+
+
+api/transaction/<string>
+GET
+(recall transaction)
+Body: receipt for transaction
+
+Status: 200 OK
+404 for not found transaction with given ID
 
 ## UML Diagrams
 https://lucid.app/lucidchart/e911c24f-67c7-4dc6-ae56-0fa3b6845f79/edit?viewport_loc=-11%2C-11%2C1365%2C613%2C0_0&invitationId=inv_bc88ed82-1500-4f1f-9d53-81b338255736 
