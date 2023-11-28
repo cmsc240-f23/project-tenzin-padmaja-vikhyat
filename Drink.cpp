@@ -1,22 +1,17 @@
 #include <iostream>
 #include <string>
-#include "Cat.h"
+#include "Drink.h"
 using namespace std;
 
-Cafe::Cafe();
+Drink::Drink(string name, int id, int cost, bool catDrink);
 
-int Cafe::getId()
+int Drink::getId()
 {
     return id;
 }
-string Cafe::getCafeInfo()
+bool Drink::catEdible()
 {
-    return "";
-}
-
-Cat Cat::Adopt()
-{
-    return;
+    return catDrink;
 }
 void convertToJson()
 {
