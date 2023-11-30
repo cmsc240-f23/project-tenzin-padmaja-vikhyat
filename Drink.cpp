@@ -1,23 +1,29 @@
-#include <iostream>
-#include <string>
 #include "Drink.h"
+
 using namespace std;
+using namespace crow;
 
-Drink::Drink(string name, int id, int cost, bool catDrink);
 
-int Drink::getId()
+Drink::Drink(json::rvalue readValueJson)  
 {
-    return id;
+    updateFromJson(readValueJson);
 }
-bool Drink::catEdible()
+
+
+// Convert to JSON
+json::wvalue Drink::convertToJson() 
 {
-    return catDrink;
+
+    // Add Record-specific details
+    writeJson["qty_ml"] = qty_ml;
+
+    return writeJson;
 }
-void convertToJson()
+
+// Update from JSON
+void Drink::updateFromJson(json::rvalue readValueJson) 
 {
-    
-}
-void updateFromJson()
-{
-    
+
+    // Update Record-specific details
+    qty_ml = readValueJson["qty_ml"].i();
 }

@@ -9,8 +9,12 @@ class Food : public Consumable{
     public:
         Food() {}
         Food(crow::json::rvalue readValueJson);
-        //int getId()const { return id; }
-        //bool catEdible();
+
+        //getter
+        int getQtyG()const { return qty_g; }
+
+        //setter
+        void setQtyG(int qty_gParam) {qty_g = qty_gParam;}
 
         //convert to JSON
         virtual crow::json::wvalue convertToJson();
@@ -20,8 +24,7 @@ class Food : public Consumable{
         
 
     private:
+        //quantity in grams
         int qty_g;
-        //bool catFood;
-
 };
 #endif
