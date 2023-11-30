@@ -1,23 +1,33 @@
-#include <iostream>
-#include <string>
+#include "Consumable.h"
 
-#ifndef CONSUMABLE_H
-#define CONSUMABLE_H
+using namespace std;
+using namespace crow;
 
-class Consumable{
-    public:
-        Consumable() {}
-        Consumable(std::string name, int id, int cost, bool catFriendly);
-        int getId();
-        bool catEdible();
-        void convertToJson();
-        void updateFromJson();
 
-    private:
-        int id;
-        std::string name;
-        int cost;
-        bool catFood;
+Consumable::Consumable(json::rvalue readValueJson)  
+{
+    updateFromJson(readValueJson);
+}
 
-};
-#endif
+
+// Convert to JSON
+json::wvalue Consumable::convertToJson() 
+{
+
+    // Add Record-specific details
+    writeJson["name"] = name;
+    writeJson["cost"] = cost;
+    writeJson["id"] = id;
+
+    return writeJson;
+}
+
+// Update from JSON
+void Consumable::updateFromJson(json::rvalue readValueJson) 
+{
+
+    // Update Record-specific details
+    name = readValueJson["name"].s();
+    cost = readValueJson["cost"].i();
+    id = readValueJson["id"].s();
+}

@@ -9,18 +9,23 @@ class Consumable
 {
     public:
         Consumable() {}
-        Consumable(string name, int id, int cost, bool catDrink);
-        int getId();
-        bool catEdible();
-        void convertToJson();
-        void updateFromJson();
+        Consumable(crow::json::rvalue readValueJson);
+        int getId()const { return id; }
+        //bool catEdible();
+
+        //convert to JSON
+        virtual crow::json::wvalue convertToJson();
+
+        //Update from JSON
+        virtual void updateFromJson(crow::json::rvalue readValueJson);
+        
 
 
     private:
-        int id;
+        string id;
         string name;
         int cost;
-        bool catDrink;
+        //bool catDrink;
 
 };
 #endif

@@ -7,18 +7,21 @@
 
 class Food : public Consumable{
     public:
-        Food(std::string name, int id, int cost, bool catFriendly);
-        int getId();
-        bool catEdible();
-        void convertToJson();
-        void updateFromJson();
+        Food() {}
+        Food(crow::json::rvalue readValueJson);
+        //int getId()const { return id; }
+        //bool catEdible();
 
+        //convert to JSON
+        virtual crow::json::wvalue convertToJson();
+
+        //Update from JSON
+        virtual void updateFromJson(crow::json::rvalue readValueJson);
+        
 
     private:
-        int id;
-        std::string name;
-        int cost;
-        bool catFood;
+        int qty_g;
+        //bool catFood;
 
 };
 #endif

@@ -1,23 +1,29 @@
-#include <iostream>
-#include <string>
 #include "Food.h"
+
 using namespace std;
+using namespace crow;
 
-Food::Food(string name, int id, int cost, bool catFriendly);
 
-int Food::getId()
+Food::Food(json::rvalue readValueJson)  
 {
-    return id;
+    updateFromJson(readValueJson);
 }
-bool Food::catEdible()
+
+
+// Convert to JSON
+json::wvalue Consumable::convertToJson() 
 {
-    return catFriendly;
+
+    // Add Record-specific details
+    writeJson["qty_g"] = qty_g;
+
+    return writeJson;
 }
-void convertToJson()
+
+// Update from JSON
+void Food::updateFromJson(json::rvalue readValueJson) 
 {
-    
-}
-void updateFromJson()
-{
-    
+
+    // Update Record-specific details
+    qty_g = readValueJson["qty_g"].i();
 }
