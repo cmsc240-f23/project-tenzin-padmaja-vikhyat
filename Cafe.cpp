@@ -78,9 +78,22 @@ void Cafe::updateFromJson(json::rvalue readValueJson)
     {
         foods.push_back(foodsMap.at(foodReadValueJson["id"].s()));
     }
+    for (json::rvalue drinkReadValueJson: readValueJson["drinks"])
+    {
+        drinks.push_back(drinksMap.at(drinkReadValueJson["id"].s()));
+    }
+    for (json::rvalue productReadValueJson: readValueJson["products"])
+    {
+        products.push_back(productsMap.at(productReadValueJson["id"].s()));
+    }
+     for (json::rvalue customerReadValueJson: readValueJson["customers"])
+    {
+        customers.push_back(customersMap.at(customerReadValueJson["id"].s()));
+    }
+     for (json::rvalue catReadValueJson: readValueJson["cats"])
+    {
+        cats.push_back(catsMap.at(catReadValueJson["id"].s()));
+    }
 
-    // Setting genre
-    json::rvalue genreReadValueJson = readValueJson["genre"];
-    genre = genresMap.at(genreReadValueJson["id"].s());
 
 }
