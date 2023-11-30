@@ -3,27 +3,25 @@
 #include <crow.h>
 using namespace std;
 
-#ifndef CUSTOMER_H
-#define CUSTOMER_H
+#ifndef CATPRODUCT_H
+#define CATPRODUC_H
 
-class Customer
+class CatProduct
 {
     public:
-        Customer() {}
-        Customer(crow::json::rvalue readValueJson);
-        //void buy(T item)
+        CatProduct() {}
+        CatProduct(crow::json::rvalue readValueJson);
         string getId() const { return id; }
+        //int getCost() const { return cost; }
         void setId(std::string idParam) { id = idParam; }
         crow::json::wvalue convertToJson();
         void updateFromJson(crow::json::rvalue readValueJson);
+
+
     private:
-        string customerName;
-        string customerEmail;
         string id;
-        bool isMember;
-        int numberOfVisits;
-        //vector <T> purchasedItems;
-        string phoneNumber;
+        string name;
+        int cost;
 
 };
 #endif

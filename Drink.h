@@ -5,7 +5,7 @@ using namespace std;
 #ifndef DRINK_H
 #define DRINK_H
 
-class Drink
+class Drink : public Consumable
 {
     public:
         Drink(string name, int id, int cost, bool catDrink);

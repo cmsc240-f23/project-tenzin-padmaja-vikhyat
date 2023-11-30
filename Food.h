@@ -5,10 +5,10 @@ using namespace std;
 #ifndef FOOD_H
 #define FOOD_H
 
-class Food
+class Food : public Consumable
 {
     public:
-        Food(string name, int id, int cost, bool catFood);
+        Food(string name, int id, int cost, bool catFriendly);
         int getId();
         bool catEdible();
         void convertToJson();
