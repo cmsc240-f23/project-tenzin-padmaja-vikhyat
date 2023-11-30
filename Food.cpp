@@ -3,7 +3,7 @@
 #include "Food.h"
 using namespace std;
 
-Food::Food(string name, int id, int cost, bool catFood);
+Food::Food(string name, int id, int cost, bool catFriendly);
 
 int Food::getId()
 {
@@ -11,7 +11,7 @@ int Food::getId()
 }
 bool Food::catEdible()
 {
-    return catFood;
+    return catFriendly;
 }
 void convertToJson()
 {
