@@ -16,15 +16,25 @@ using namespace std;
 class Cafe
 {
     public:
-        Cafe(crow::json::rvalue readValueJson);
+        // Constructors
         Cafe() {}
+        Cafe(crow::json::rvalue readValueJson);
+        
+        // getters
         string getId() const { return id; }
+
+        // setters
         void setId(std::string idParam) { id = idParam; }
+
+        //
         void donate(float amount) {totalDonation += amount;}
+
+        //convert to JSON
         virtual crow::json::wvalue convertToJson();
+
+        //Update from JSON
         virtual void updateFromJson(crow::json::rvalue readValueJson);
         
-
     private:
         string id;
         string name;
@@ -35,7 +45,6 @@ class Cafe
         vector<Drink> drinks;
         vector<Cat> cats;
         vector<CatProduct> products;
-
-
 };
+
 #endif

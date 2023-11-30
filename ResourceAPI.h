@@ -9,11 +9,11 @@ template <typename T>
 class ResourceAPI{
     public:
         static std::map<std::string, T> resourceMap;
-        static crow::response createResource(request req);
-        static crow::response readResource(request req);
-        static crow::response readAllResources(request req);
-        static crow::response updateResource(request req);
-        static crow::response deleteResource(request req);
-}
+        static crow::response createResource(crow::request req);
+        static crow::response readAllResources(crow::request req);
+        static crow::response readResource(std::string id);
+        static void updateResource(crow::request req, crow::response& res, std::string id);
+        static crow::response deleteResource(std::string id);
+};
 
 #endif

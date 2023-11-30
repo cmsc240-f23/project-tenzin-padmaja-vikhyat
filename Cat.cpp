@@ -14,7 +14,7 @@ json::wvalue Cat::convertToJson()
     writeJson["id"] = id;
     writeJson["name"] = name;
     writeJson["breed"] = breed;
-    writeJson["age"] = age;
+    writeJson["dob"] = dob;
     writeJson["availableForAdoption"] = availableForAdoption;
     writeJson["rescueStory"] = rescueStory;
     return writeJson;
@@ -26,13 +26,13 @@ void Cat::updateFromJson(json::rvalue readValueJson)
     id = readValueJson["id"].s();
     name = readValueJson["name"].s();
     breed = readValueJson["breed"].s();
-    age = readValueJson["age"].i();
+    dob = readValueJson["dob"].s();
     availableForAdoption = readValueJson["availableForAdoption"].b();
     rescueStory = readValueJson["rescueStory"].s();
 }
 
 //look at this later...
-Cat Cat::Adopt()
-{
-    return;
-}
+// void Cat::Adopt()
+// {
+//     return NULL;
+// }

@@ -1,14 +1,13 @@
 #include <iostream>
 #include <string>
-using namespace std;
+#include "Consumable.h"
 
 #ifndef DRINK_H
 #define DRINK_H
 
-class Drink : public Consumable
-{
+class Drink : public Consumable{
     public:
-        Drink(string name, int id, int cost, bool catDrink);
+        Drink(std::string name, int id, int cost, bool catDrink);
         int getId();
         bool catEdible();
         void convertToJson();
@@ -17,7 +16,7 @@ class Drink : public Consumable
 
     private:
         int id;
-        string name;
+        std::string name;
         int cost;
         bool catDrink;
 

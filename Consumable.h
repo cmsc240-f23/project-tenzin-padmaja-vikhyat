@@ -8,8 +8,8 @@ using namespace std;
 class Consumable
 {
     public:
-    Record() {}
-        Drink(string name, int id, int cost, bool catDrink);
+        Consumable() {}
+        Consumable(string name, int id, int cost, bool catDrink);
         int getId();
         bool catEdible();
         void convertToJson();

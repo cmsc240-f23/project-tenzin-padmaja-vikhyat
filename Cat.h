@@ -4,8 +4,6 @@
 #include <crow.h>
 #include <iostream>
 #include <string>
-#include "Cafe.h"
-
 
 class Cat
 {
@@ -18,7 +16,7 @@ class Cat
         std::string getId() const { return id; }
         std::string getName() const { return name; }
         std::string getBreed() const { return breed; }
-        int getAge() const { return age; }
+        std::string getDob() const { return dob; }
         bool getAvailableForAdoption() const { return availableForAdoption; }
         std::string getRescueStory() const { return rescueStory; }
 
@@ -27,25 +25,24 @@ class Cat
         void setId(std::string idParam) { id = idParam; }
         void setName(std::string nameParam) { name = nameParam; }
         void setBreed(std::string breedParam) { breed = breedParam; }
-        void setAge(int ageParam) { age = ageParam; }
+        void setDob(std::string dobParam) { dob = dobParam; }
         void setAvailableForAdoption(bool availableForAdoptionParam) { availableForAdoption = availableForAdoptionParam; }
         void setRescueStory(std::string rescueStoryParam) { rescueStory = rescueStoryParam; }
 
         //fucntion for adopting cat - meanign delete that cat instance 
-        Cat Adopt();//deleting the cat
+        void Adopt();//deleting the cat
 
         //convert to JSON
-        virtual crow::json::wvalue convertToJson();
+        crow::json::wvalue convertToJson();
         
         //Update from JSON
-        virtual void updateFromJson(crow::json::rvalue readValueJson);
-
+        void updateFromJson(crow::json::rvalue readValueJson);
 
     private:
         std::string id;
         std::string name;
         std::string breed;
-        int age;
+        std::string dob;
         bool availableForAdoption;
         std::string rescueStory;
 };
