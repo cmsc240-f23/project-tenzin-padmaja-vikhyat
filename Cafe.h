@@ -25,7 +25,7 @@ class Cafe
         // setters
         void setId(std::string idParam) { id = idParam; }
 
-        //
+        // donate method
         void donate(float amount) {totalDonation += amount;}
 
         //convert to JSON
