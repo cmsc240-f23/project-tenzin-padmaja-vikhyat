@@ -45,24 +45,35 @@ Customers can place orders (known as transactions) that contain multiple items l
 | :---: | :--- |
 | Cafe         | cafe’s information like name, address, donations, transactions, and availability of drinks, food, and cats |
 | Cat          | provides a list of cats with their info (name, breed, age, adoptability, ...). It also allows customers to adopt cats. |
-| Products     | list of products available for purchase, including cat toys and merch |
 | Customer     | information about customer like name, email, phone number, membership status |
-| Transactions | information about transaction like timestamp, items, qty.s, total and customer ID |
-| Drinks       | drinks options and the prices associated with it |
+| Drink       | drinks options and the prices associated with it |
 | Food         | food options and the prices associated with it |
 
 ## List of End Points
 
-| Endpoint URL | HTTP Method | Request Body | Expected Response | Error Status
-| :---: | :---: | :---: | :---: | :---: |
-| api/cat/<string>         | GET                      |TBA..| Body: JSON representation of cat info , Status: 200 OK          | 404 for not found cat with given ID |
-| api/cats                 | GET                      || Body: JSON array of cat info          , Status: 200 OK          | |
-| api/donate               | POST                     || Body: Confirmation message, Status: 201 Created                 | |
-| api/cat                  | PUT (after rescue)       || Body: JSON representation of cat info, Status: 201 created      | |
-| api/cat                  | DELETE (after adoption)  || Body: Confirmation message                                      | |
-| api/transactions          | POST (new transaction)   || Body: receipt for transaction, Status: 201 Created              | |
-| api/transactions/\<string\> | GET (recall transaction) || Body: receipt for transaction, Status: 200 OK                   | 404 for not found transaction with given ID |
-| api/transactions/ | GET (recall transactions in date range) | date range | Body: transactions in given range, Status: 200 OK                   | |
+| Relevant Resource | Endpoint URL | HTTP Method | Request Body | Expected Response | Error Status
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| Cats | api/cats                    | POST      | JSON representation of cat info | Status: 201 created, Body: JSON representation of cat info | 400 Bad Request (body JSON did not match the resource structure) |
+| Cats | api/cats                    | GET                      |                                 | Status: 200 OK, Body: JSON representation of all cats' info | |
+| Cats | api/cats/\<string\>         | GET                      |                                 | Status: 200 OK, Body: JSON representation of cat info | 404 for not found cat with given ID |
+| Cats | api/cats/\<string\>         | PUT                      | JSON representation of cat info | Status: 200 OK, Body: JSON representation of cat info | Status: 404 Cat with given ID not found OR 400 Bad Request (body JSON did not match the resource structure) |
+| Cats | api/cats/\<string\>         | DELETE                   |                                 | Status: 200 OK          | 404 for not found cat with given ID |
+| Customers | api/customers                    | POST     | JSON representation of customer info | Status: 201 created, Body: JSON representation of customer info | 400 Bad Request (body JSON did not match the resource structure) |
+| Customers | api/customers                    | GET                      |                                 | Status: 200 OK, Body: JSON representation of all customers' info | |
+| Customers | api/customers/\<string\>         | GET                      |                                 | Status: 200 OK, Body: JSON representation of customer info | 404 for not found customer with given ID |
+| Customers | api/customers/\<string\>         | PUT                      | JSON representation of customer info | Status: 200 OK, Body: JSON representation of customer info | Status: 404 customer with given ID not found OR 400 Bad Request (body JSON did not match the resource structure) |
+| Customers | api/customers/\<string\>         | DELETE                   |                                 | Status: 200 OK          | 404 for not found customer with given ID |
+| Foods | api/foods                    | POST (after rescue)      | JSON representation of food info | Status: 201 created, Body: JSON representation of food info | 400 Bad Request (body JSON did not match the resource structure) |
+| Foods | api/foods                    | GET                      |                                 | Status: 200 OK, Body: JSON representation of all foods' info | |
+| Foods | api/foods/\<string\>         | GET                      |                                 | Status: 200 OK, Body: JSON representation of food info | 404 for not found food with given ID |
+| Foods | api/foods/\<string\>         | PUT                      | JSON representation of food info | Status: 200 OK, Body: JSON representation of food info | Status: 404 food with given ID not found OR 400 Bad Request (body JSON did not match the resource structure) |
+| Foods | api/foods/\<string\>         | DELETE                   |                                 | Status: 200 OK          | 404 for not found food with given ID |
+| Drinks | api/drinks                    | POST (after rescue)      | JSON representation of drink info | Status: 201 created, Body: JSON representation of drink info | 400 Bad Request (body JSON did not match the resource structure) |
+| Drinks | api/drinks                    | GET                      |                                 | Status: 200 OK, Body: JSON representation of all drinks' info | |
+| Drinks | api/drinks/\<string\>         | GET                      |                                 | Status: 200 OK, Body: JSON representation of drink info | 404 for not found drink with given ID |
+| Drinks | api/drinks/\<string\>         | PUT                      | JSON representation of drink info | Status: 200 OK, Body: JSON representation of drink info | Status: 404 drink with given ID not found OR 400 Bad Request (body JSON did not match the resource structure) |
+| Drinks | api/drinks/\<string\>         | DELETE                   |                                 | Status: 200 OK          | 404 for not found drink with given ID |
+| Cafe | api/donate               | POST                     || Body: Confirmation message, Status: 201 Created                 | |
 
 ## UML Diagrams
 https://lucid.app/lucidchart/e911c24f-67c7-4dc6-ae56-0fa3b6845f79/edit?viewport_loc=-11%2C-11%2C1365%2C613%2C0_0&invitationId=inv_bc88ed82-1500-4f1f-9d53-81b338255736 
