@@ -22,7 +22,6 @@ class Food : public Consumable{
         //Update from JSON
         virtual void updateFromJson(crow::json::rvalue readValueJson);
         
-
     private:
         //quantity in grams
         int qty_g;

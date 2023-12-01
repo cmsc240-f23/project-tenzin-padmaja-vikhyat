@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <string>
-using namespace std;
 
 class Consumable
 {
@@ -20,7 +19,7 @@ class Consumable
         //setters
         void setId(std::string idParam) { id = idParam; }
         void setName(std::string nameParam) { name = nameParam; }
-        void setCost(std::float costParam) { cost = costParam; }        
+        void setCost(float costParam) { cost = costParam; }        
 
         //convert to JSON
         virtual crow::json::wvalue convertToJson();
@@ -28,10 +27,9 @@ class Consumable
         //Update from JSON
         virtual void updateFromJson(crow::json::rvalue readValueJson);
         
-
     private:
-        string id;
-        string name;
+        std::string id;
+        std::string name;
         int cost;
 };
 #endif
