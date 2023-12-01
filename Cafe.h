@@ -1,17 +1,17 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include <crow.h>
-#include "Cat.h"
-#include "Customer.h"
-#include "CatProduct.h"
-#include "Food.h"
-#include "Drink.h"
-
-using namespace std;
-
 #ifndef CAFE_H
 #define CAFE_H
+
+#include <crow.h>
+#include <iostream>
+#include <string>
+
+#include <vector>
+#include "Cat.h"
+#include "Customer.h"
+
+// #include "Food.h"
+// #include "Drink.h"
+// #include "CatProduct.h"
 
 class Cafe
 {
@@ -21,7 +21,7 @@ class Cafe
         Cafe(crow::json::rvalue readValueJson);
         
         // getters
-        string getId() const { return id; }
+        std::string getId() const { return id; }
 
         // setters
         void setId(std::string idParam) { id = idParam; }
@@ -30,21 +30,21 @@ class Cafe
         void donate(float amount) {totalDonation += amount;}
 
         //convert to JSON
-        virtual crow::json::wvalue convertToJson();
+        crow::json::wvalue convertToJson();
 
         //Update from JSON
-        virtual void updateFromJson(crow::json::rvalue readValueJson);
+        void updateFromJson(crow::json::rvalue readValueJson);
         
     private:
-        string id;
-        string name;
-        string address;
+        std::string id;
+        std::string name;
+        std::string address;
         float totalDonation = 0;
-        vector<Customer> customers;
-        vector<Food> foods;
-        vector<Drink> drinks;
-        vector<Cat> cats;
-        vector<CatProduct> products;
+        std::vector<Cat> cats;
+        std::vector<Customer> customers;
+        // std::vector<Food> foods;
+        // std::vector<Drink> drinks;
+        // std::vector<CatProduct> products;
 };
 
 #endif

@@ -20,8 +20,7 @@ class Cat
         bool getAvailableForAdoption() const { return availableForAdoption; }
         std::string getRescueStory() const { return rescueStory; }
 
-
-        //set methods
+        //setters
         void setId(std::string idParam) { id = idParam; }
         void setName(std::string nameParam) { name = nameParam; }
         void setBreed(std::string breedParam) { breed = breedParam; }
@@ -46,4 +45,5 @@ class Cat
         bool availableForAdoption;
         std::string rescueStory;
 };
+
 #endif

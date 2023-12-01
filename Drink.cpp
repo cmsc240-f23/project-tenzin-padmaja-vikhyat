@@ -3,7 +3,6 @@
 using namespace std;
 using namespace crow;
 
-
 Drink::Drink(json::rvalue readValueJson)  
 {
     updateFromJson(readValueJson);
@@ -13,8 +12,9 @@ Drink::Drink(json::rvalue readValueJson)
 // Convert to JSON
 json::wvalue Drink::convertToJson() 
 {
+    json::wvalue writeJson;
 
-    // Add Record-specific details
+    // Add Drink-specific details
     writeJson["qty_ml"] = qty_ml;
 
     return writeJson;
@@ -23,7 +23,6 @@ json::wvalue Drink::convertToJson()
 // Update from JSON
 void Drink::updateFromJson(json::rvalue readValueJson) 
 {
-
-    // Update Record-specific details
+    // Update Drink-specific details
     qty_ml = readValueJson["qty_ml"].i();
 }

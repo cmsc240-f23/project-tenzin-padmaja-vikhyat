@@ -3,7 +3,6 @@
 using namespace std;
 using namespace crow;
 
-
 Customer::Customer(json::rvalue readValueJson)  
 {
     updateFromJson(readValueJson);
@@ -13,9 +12,10 @@ Customer::Customer(json::rvalue readValueJson)
 json::wvalue Customer::convertToJson() 
 {
     json::wvalue writeJson;
+    
     writeJson["id"] = id;
-    writeJson["customerName"] = customerName;
-    writeJson["customerEmail"] = customerEmail;
+    writeJson["name"] = name;
+    writeJson["email"] = email;
     writeJson["numberOfVisits"] = numberOfVisits;
     writeJson["phoneNumber"] = phoneNumber;
     writeJson["isMember"] = isMember;
@@ -27,10 +27,10 @@ json::wvalue Customer::convertToJson()
 void Customer::updateFromJson(json::rvalue readValueJson) 
 {
     id = readValueJson["id"].s();
-    customerEmail = readValueJson["customerEmail"].s();
-    customerName = readValueJson["customerName"].s();
+    email = readValueJson["email"].s();
+    name = readValueJson["name"].s();
     numberOfVisits  = readValueJson["numberOfVisits"].i();
     phoneNumber = readValueJson["phoneNumber"].s();
-    isMember = readValueJson["phoneNumber"].b();
+    isMember = readValueJson["isMember"].b();
 }
 

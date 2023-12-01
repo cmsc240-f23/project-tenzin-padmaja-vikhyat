@@ -1,16 +1,15 @@
-#include <string>
-#include <map>
+#include <crow.h>
 #include <fstream>
-// #include <json>
+#include "FileIO.h"
 
 using namespace std;
 using namespace crow;
 
 template <typename T>
-void saveToFile(std::map<std::string, T> data, std::string filename)  
+void saveToFile(map<string, T> data, string filename)  
 {
     // Open the file for writing
-    std::ofstream file(filename);
+    ofstream file(filename);
 
     if (file.is_open()) 
     {
@@ -27,6 +26,11 @@ void saveToFile(std::map<std::string, T> data, std::string filename)
             index++;
         }
 
+        // // If there were no objects in the map, write an empty JSON value
+        // if (index==0){
+        //     jsonWriteValue = json({});
+        // }
+
         // Write the JSON to the file.
         file << jsonWriteValue.dump();
         file.close();
@@ -34,18 +38,18 @@ void saveToFile(std::map<std::string, T> data, std::string filename)
 }
 
 template <typename T>
-std::map<string, T> loadFromFile(std::string filename) 
+map<string, T> loadFromFile(string filename) 
 {
-    std::map<string, T> data;
+    map<string, T> data;
     
     // Open the file for reading.
-    std::ifstream file(filename);
+    ifstream file(filename);
 
     // If the file is open. 
     if (file.is_open()) 
     {      
         // Create a stream for reading in the file.
-        std::ostringstream stringStreamJson;
+        ostringstream stringStreamJson;
 
         // Read the entire JSON string.
         stringStreamJson << file.rdbuf();
@@ -58,12 +62,18 @@ std::map<string, T> loadFromFile(std::string filename)
 
         // For each item in the JSON convert it to an object, 
         // and add it to the data map.
-        for (json::rvalue item : jsonReadValue) 
+        try
         {
-            T resource{item};
-            data[resource.getId()] = resource;
+            for (json::rvalue item : jsonReadValue) 
+            {
+                T resource{item};
+                data[resource.getId()] = resource;
+            }
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << "Could not read file" << filename << '\n';
         }
     }
-    
     return data;
 }

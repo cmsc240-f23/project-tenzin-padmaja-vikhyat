@@ -1,33 +1,33 @@
-#include "CatProduct.h"
+// #include "CatProduct.h"
 
-using namespace std;
-using namespace crow;
-
-
-CatProduct::CatProduct(json::rvalue readValueJson)  
-{
-    updateFromJson(readValueJson);
-}
+// using namespace std;
+// using namespace crow;
 
 
-// Convert to JSON
-json::wvalue CatProduct::convertToJson() 
-{
+// CatProduct::CatProduct(json::rvalue readValueJson)  
+// {
+//     updateFromJson(readValueJson);
+// }
 
-    // Add Record-specific details
-    writeJson["name"] = name;
-    writeJson["cost"] = cost;
-    writeJson["id"] = id;
 
-    return writeJson;
-}
+// // Convert to JSON
+// json::wvalue CatProduct::convertToJson() 
+// {
 
-// Update from JSON
-void CatProduct::updateFromJson(json::rvalue readValueJson) 
-{
+//     // Add Record-specific details
+//     writeJson["name"] = name;
+//     writeJson["cost"] = cost;
+//     writeJson["id"] = id;
 
-    // Update Record-specific details
-    name = readValueJson["name"].s();
-    cost = readValueJson["cost"].s();
-    id = readValueJson["id"].s();
-}
+//     return writeJson;
+// }
+
+// // Update from JSON
+// void CatProduct::updateFromJson(json::rvalue readValueJson) 
+// {
+
+//     // Update Record-specific details
+//     name = readValueJson["name"].s();
+//     cost = readValueJson["cost"].s();
+//     id = readValueJson["id"].s();
+// }

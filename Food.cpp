@@ -3,18 +3,17 @@
 using namespace std;
 using namespace crow;
 
-
 Food::Food(json::rvalue readValueJson)  
 {
     updateFromJson(readValueJson);
 }
 
-
 // Convert to JSON
-json::wvalue Consumable::convertToJson() 
+json::wvalue Food::convertToJson() 
 {
+    json::wvalue writeJson;
 
-    // Add Record-specific details
+    // Add Food-specific details
     writeJson["qty_g"] = qty_g;
 
     return writeJson;
@@ -23,7 +22,6 @@ json::wvalue Consumable::convertToJson()
 // Update from JSON
 void Food::updateFromJson(json::rvalue readValueJson) 
 {
-
-    // Update Record-specific details
+    // Update Food-specific details
     qty_g = readValueJson["qty_g"].i();
 }

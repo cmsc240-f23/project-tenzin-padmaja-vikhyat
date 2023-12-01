@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <crow.h>
 
 class Consumable
 {
@@ -12,8 +13,8 @@ class Consumable
         Consumable(crow::json::rvalue readValueJson);
 
         //getters
-        string getId()const { return id; }
-        string getName()const { return name; }
+        std::string getId()const { return id; }
+        std::string getName()const { return name; }
         float getCost() const { return cost; }
 
         //setters
@@ -32,4 +33,5 @@ class Consumable
         std::string name;
         int cost;
 };
+
 #endif

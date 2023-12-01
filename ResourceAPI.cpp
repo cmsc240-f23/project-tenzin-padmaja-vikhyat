@@ -1,11 +1,12 @@
 #include <crow.h>
 #include "ResourceAPI.h"
 #include "Cat.h"
-#include "Cafe.h"
-// #include "CatProduct.h"
+// #include "Cafe.h"
+#include "Customer.h"
 // #include "Food.h"
 // #include "Drink.h"
-// #include "Customer.h"
+// #include "Consumable.h"
+// #include "CatProduct.h"
 
 using namespace std;
 using namespace crow;
@@ -24,13 +25,19 @@ response ResourceAPI<T>::createResource(request req){
         return response(400, "Invalid JSON");
     
     // Create a new resource.
-    T resource{readValueJson};
-
-    // Add the new resource to the map.
-    resourceMap[resource.getId()] = resource;
-
-    // Return the created resource as a JSON string.
-    return response(201, resource.convertToJson());
+    try
+    {
+        T resource{readValueJson};
+        // Add the new resource to the map.
+        resourceMap[resource.getId()] = resource;
+        // Return the created resource as a JSON string.
+        return response(201, resource.convertToJson());
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << " ... your specs probably didn't match the resource attributes" << '\n';
+        return response(400, "Bad request: the body JSON did not match the resource structure");
+    }
 }
 
 //Read All
@@ -128,8 +135,7 @@ response ResourceAPI<T>::deleteResource(string id){
 
 template class ResourceAPI<Cat>;
 // template class ResourceAPI<Cafe>;
-// template class ResourceAPI<Customer>;
+template class ResourceAPI<Customer>;
 // template class ResourceAPI<Food>;
 // template class ResourceAPI<Drink>;
 // template class ResourceAPI<CatProduct>;
-// template class ResourceAPI<int>;
