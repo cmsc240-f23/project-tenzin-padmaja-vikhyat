@@ -2,23 +2,30 @@
 #include <string>
 #include "Consumable.h"
 
-#ifndef DRINK_H
-#define DRINK_H
+#ifndef FOOD_H
+#define FOOD_H
 
-class Drink : public Consumable{
+class Food : public Consumable{
     public:
-        Drink(std::string name, int id, int cost, bool catDrink);
-        int getId();
-        bool catEdible();
-        void convertToJson();
-        void updateFromJson();
+        Food() {}
+        Food(crow::json::rvalue readValueJson);
 
+        //getter
+        int getQtyMl()const { return qty_ml; }
+
+        //setter
+        void setQtyMl(int qty_mlParam) {qty_ml = qty_mlParam;}
+
+        //convert to JSON
+        virtual crow::json::wvalue convertToJson();
+
+        //Update from JSON
+        virtual void updateFromJson(crow::json::rvalue readValueJson);
+        
 
     private:
-        int id;
-        std::string name;
-        int cost;
-        bool catDrink;
-
+        //quanitity in ml
+        int qty_ml;
+     
 };
 #endif
