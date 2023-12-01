@@ -2,10 +2,10 @@
 #include "ResourceAPI.h"
 #include "Cat.h"
 #include "Cafe.h"
-#include "CatProduct.h"
-#include "Food.h"
-#include "Drink.h"
-#include "Customer.h"
+// #include "CatProduct.h"
+// #include "Food.h"
+// #include "Drink.h"
+// #include "Customer.h"
 
 using namespace std;
 using namespace crow;
@@ -127,9 +127,9 @@ response ResourceAPI<T>::deleteResource(string id){
 }
 
 template class ResourceAPI<Cat>;
-template class ResourceAPI<Cafe>;
-template class ResourceAPI<Customer>;
-template class ResourceAPI<Food>;
-template class ResourceAPI<Drink>;
-template class ResourceAPI<CatProduct>;
+// template class ResourceAPI<Cafe>;
+// template class ResourceAPI<Customer>;
+// template class ResourceAPI<Food>;
+// template class ResourceAPI<Drink>;
+// template class ResourceAPI<CatProduct>;
 // template class ResourceAPI<int>;

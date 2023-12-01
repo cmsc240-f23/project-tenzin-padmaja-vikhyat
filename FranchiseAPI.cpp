@@ -1,8 +1,10 @@
 #include <crow.h>
 #include <map>
+#include <string>
 
 #include "ResourceAPI.h"
 #include "FileIO.h"
+#include "FileIO.cpp"
 #include "Cat.h"
 #include "Cat.cpp"
 
@@ -11,6 +13,7 @@
 // #include "Drink.h"
 // #include "Customer.h"
 
+using namespace std;
 using namespace crow;
 
 // load everything into maps
@@ -22,8 +25,7 @@ response testFunction(request req){
 int main(){
 
     // set the maps for the static API classes
-    std::map<std::string, Cat> testMap;
-    ResourceAPI<Cat>::resourceMap =  testMap;
+    ResourceAPI<Cat>::resourceMap = loadFromFile<Cat>((string) "Cats.json");
 
     // Setup the simple web service.
     SimpleApp app;
@@ -40,7 +42,7 @@ int main(){
     app.port(13579).run();
 
 //     // save everything
-//     // FileIO::
+    saveToFile(ResourceAPI<Cat>::resourceMap, "Cats.json");
 
     return 0;
 }

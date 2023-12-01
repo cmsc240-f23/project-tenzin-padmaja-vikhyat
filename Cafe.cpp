@@ -14,7 +14,6 @@ using namespace crow;
 extern map<std::string, Customer> CustomersMap;
 extern map<std::string, Cat> CatsMap;
 
-
 Cafe::Cafe(json::rvalue readValueJson)
 {
     updateFromJson(readValueJson);
@@ -25,10 +24,11 @@ json::wvalue Cafe::convertToJson()
     writeJson["id"] = id;
     writeJson["name"] = name;
     writeJson["address"] = address;
+    writeJson["cats"] = catVector;
     //writeJson["foods"] = foodVector;
     //writeJson["drinks"] = drinkVector;
    // writeJson["products"] = productVector;
-   // writeJson["cats"] = catVector;
+   
     writeJson["totalDonation"] = totalDonation;
     //writeJson["customers"] = customerVector;
     

@@ -7,12 +7,12 @@
 
 class Food : public Consumable{
     public:
+        Food() {};
         Food(std::string name, int id, int cost, bool catFriendly);
         int getId();
         bool catEdible();
         void convertToJson();
         void updateFromJson();
-
 
     private:
         int id;
