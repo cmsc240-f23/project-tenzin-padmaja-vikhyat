@@ -11,7 +11,6 @@
 
 // #include "Food.h"
 // #include "Drink.h"
-// #include "CatProduct.h"
 
 class Cafe
 {
@@ -44,7 +43,6 @@ class Cafe
         std::vector<Customer> customers;
         // std::vector<Food> foods;
         // std::vector<Drink> drinks;
-        // std::vector<CatProduct> products;
 };
 
 #endif

@@ -6,7 +6,6 @@
 // #include "Food.h"
 // #include "Drink.h"
 // #include "Consumable.h"
-// #include "CatProduct.h"
 
 using namespace std;
 using namespace crow;
@@ -138,4 +137,3 @@ template class ResourceAPI<Cat>;
 template class ResourceAPI<Customer>;
 // template class ResourceAPI<Food>;
 // template class ResourceAPI<Drink>;
-// template class ResourceAPI<CatProduct>;

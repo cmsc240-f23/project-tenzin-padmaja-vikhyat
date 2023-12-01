@@ -5,7 +5,6 @@
 #include "Cafe.h"
 #include "Cat.h"
 // #include "Customer.h"
-// #include "CatProduct.h"
 // #include "Food.h"
 // #include "Drink.h"
 
@@ -27,7 +26,6 @@ json::wvalue Cafe::convertToJson(){
     // writeJson["cats"] = catVector;
     //writeJson["foods"] = foodVector;
     //writeJson["drinks"] = drinkVector;
-   // writeJson["products"] = productVector;
    
     writeJson["totalDonation"] = totalDonation;
     //writeJson["customers"] = customerVector;
@@ -55,11 +53,6 @@ json::wvalue Cafe::convertToJson(){
     // {
     //     writeJson["drinks"][index2]["id"] = drink.getId();
     // }
-    // int index3 = 0;
-    // for (CatProduct product : products) 
-    // {
-    //     writeJson["products"][index3]["id"] = product.getId();
-    // }
     
     // // If you want the full json for each artist to be included:
     // for (Artist artist : artists) 
@@ -82,10 +75,6 @@ void Cafe::updateFromJson(json::rvalue readValueJson) {
     // for (json::rvalue drinkReadValueJson: readValueJson["drinks"])
     // {
     //     drinks.push_back(drinksMap.at(drinkReadValueJson["id"].s()));
-    // }
-    // for (json::rvalue productReadValueJson: readValueJson["products"])
-    // {
-    //     products.push_back(productsMap.at(productReadValueJson["id"].s()));
     // }
     //  for (json::rvalue customerReadValueJson: readValueJson["customers"])
     // {
