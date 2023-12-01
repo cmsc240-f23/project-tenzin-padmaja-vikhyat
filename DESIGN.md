@@ -76,8 +76,9 @@ Customers can place orders (known as transactions) that contain multiple items l
 | Cafe | api/donate               | POST                     || Body: Confirmation message, Status: 201 Created                 | |
 | Cafe | api/cafe                    | GET                      |                                 | Status: 200 OK, Body: JSON representation of cafe info | |
 | Cafe | api/cafe                    | PUT                      | JSON representation of cafe info | Status: 200 OK, Body: JSON representation of cafe info | Status: 400 Bad Request (body JSON did not match the resource structure) |
-
-| Cafe | api/cafe?search...                    | GET                      |                                 | Status: 200 OK, Body: JSON representation of cafe info | |
+| Cafe | api/cafe?search... | GET                      |                                 | Status: 200 OK, Body: JSON representation of adoptable cats | |
+| Cafe | api/cafe?search... | GET                      |                                 | Status: 200 OK, Body: JSON representation of cat-eligible foods | |
+| Cafe | api/cafe?search... | GET                      |                                 | Status: 200 OK, Body: JSON representation of cat-eligible drinks | |
 
 ## UML Diagrams
 https://lucid.app/lucidchart/e911c24f-67c7-4dc6-ae56-0fa3b6845f79/edit?viewport_loc=-11%2C-11%2C1365%2C613%2C0_0&invitationId=inv_bc88ed82-1500-4f1f-9d53-81b338255736 
