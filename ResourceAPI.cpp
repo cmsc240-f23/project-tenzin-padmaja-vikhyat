@@ -3,8 +3,8 @@
 #include "Cat.h"
 // #include "Cafe.h"
 #include "Customer.h"
-// #include "Food.h"
-// #include "Drink.h"
+#include "Food.h"
+#include "Drink.h"
 // #include "Consumable.h"
 
 using namespace std;
@@ -135,5 +135,5 @@ response ResourceAPI<T>::deleteResource(string id){
 template class ResourceAPI<Cat>;
 // template class ResourceAPI<Cafe>;
 template class ResourceAPI<Customer>;
-// template class ResourceAPI<Food>;
-// template class ResourceAPI<Drink>;
+template class ResourceAPI<Food>;
+template class ResourceAPI<Drink>;

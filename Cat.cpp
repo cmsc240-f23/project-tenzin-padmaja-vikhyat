@@ -30,9 +30,3 @@ void Cat::updateFromJson(json::rvalue readValueJson)
     availableForAdoption = readValueJson["availableForAdoption"].b();
     rescueStory = readValueJson["rescueStory"].s();
 }
-
-//look at this later...
-// void Cat::Adopt()
-// {
-//     return NULL;
-// }

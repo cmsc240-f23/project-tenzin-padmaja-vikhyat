@@ -1,12 +1,13 @@
+#ifndef DRINK_H
+#define DRINK_H
+
 #include <iostream>
 #include <string>
 #include "Consumable.h"
 
-#ifndef DRINK_H
-#define DRINK_H
-
 class Drink : public Consumable{
     public:
+        // Constructors
         Drink() {}
         Drink(crow::json::rvalue readValueJson);
 
@@ -25,6 +26,6 @@ class Drink : public Consumable{
     private:
         //quanitity in ml
         int qty_ml;
-     
 };
+
 #endif

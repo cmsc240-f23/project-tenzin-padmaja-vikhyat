@@ -16,7 +16,10 @@ This is the problem we hope to tackle, in particular by creating the web service
 
 ## Stakeholders
 
-Visiting customers, potential cat adopters, frontdesk employees, and the cafe owner.
+- **Visiting Customers**: These are people who use the API to spend time with the cats, purchase food or drinks and feed the cats too.
+- **Potential Cat Adopters**: These are people who use the API to adopt a cat from the cafe depending on whether the cat is available for adoption
+- **Front Desk Employees**: These are people who use the API to manage the flow of customers and cat adoption.
+
 
 ## Functional Requirements
 
@@ -37,7 +40,7 @@ The client can fetch the list of all existing cats, particularly their names and
 If a customer asks for more info about a particular cat, the client can fetch all the specific details for that particular cat using its ID.
 If the customer wants to adopt the cat, the client can request an adoption for that client, which will get approved if the cat is adoptable.
 Customers can choose to donate to the cafe’s funds.
-Customers can place orders (known as transactions) that contain multiple items like foods, drinks, products (merch/toys).
+Customers can place orders for items like foods and drinks.
 
 ## List Of Resources
 

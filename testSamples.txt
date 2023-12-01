@@ -8,6 +8,16 @@ Cat example:
   "rescueStory":"r"
 }
 
+{"id":"8",
+  "name":"bonbon",
+  "breed":"b",
+  "dob":"c",
+  "availableForAdoption":false,
+  "rescueStory":"r"
+}
+
+Custoemr example:
+
 {"id":"11",
   "name":"Rohan",
   "email":"rohan@jmail.com",
@@ -16,10 +26,10 @@ Cat example:
   "isMember":true
 }
 
-{"id":"8",
-  "name":"bonbon",
-  "breed":"b",
-  "dob":"c",
-  "availableForAdoption":false,
-  "rescueStory":"r"
+Food example:
+{"id":"11",
+  "name":"Rohan",
+  "email":"rohan@jmail.com",
+  "cost":142,
+  "qty_g":150
 }

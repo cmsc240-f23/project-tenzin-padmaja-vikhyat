@@ -11,7 +11,7 @@ Food::Food(json::rvalue readValueJson)
 // Convert to JSON
 json::wvalue Food::convertToJson() 
 {
-    json::wvalue writeJson;
+    json::wvalue writeJson = Consumable::convertToJson();
 
     // Add Food-specific details
     writeJson["qty_g"] = qty_g;
@@ -21,7 +21,8 @@ json::wvalue Food::convertToJson()
 
 // Update from JSON
 void Food::updateFromJson(json::rvalue readValueJson) 
-{
+{   
+    Consumable::updateFromJson(readValueJson); 
     // Update Food-specific details
     qty_g = readValueJson["qty_g"].i();
 }

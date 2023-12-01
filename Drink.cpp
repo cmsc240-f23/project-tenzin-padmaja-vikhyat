@@ -12,7 +12,7 @@ Drink::Drink(json::rvalue readValueJson)
 // Convert to JSON
 json::wvalue Drink::convertToJson() 
 {
-    json::wvalue writeJson;
+    json::wvalue writeJson = Consumable::convertToJson();
 
     // Add Drink-specific details
     writeJson["qty_ml"] = qty_ml;
@@ -23,6 +23,7 @@ json::wvalue Drink::convertToJson()
 // Update from JSON
 void Drink::updateFromJson(json::rvalue readValueJson) 
 {
+    Consumable::updateFromJson(readValueJson); 
     // Update Drink-specific details
     qty_ml = readValueJson["qty_ml"].i();
 }

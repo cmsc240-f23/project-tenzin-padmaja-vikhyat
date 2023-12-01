@@ -1,12 +1,13 @@
+#ifndef FOOD_H
+#define FOOD_H
+
 #include <iostream>
 #include <string>
 #include "Consumable.h"
 
-#ifndef FOOD_H
-#define FOOD_H
-
 class Food : public Consumable{
     public:
+        // Constructors
         Food() {}
         Food(crow::json::rvalue readValueJson);
 
@@ -26,4 +27,5 @@ class Food : public Consumable{
         //quantity in grams
         int qty_g;
 };
+
 #endif
