@@ -1,0 +1,25 @@
+Cat example:
+
+{"id":"1",
+  "name":"a",
+  "breed":"b",
+  "dob":"c",
+  "availableForAdoption":false,
+  "rescueStory":"r"
+}
+
+{"id":"11",
+  "name":"Rohan",
+  "email":"rohan@jmail.com",
+  "numberOfVisits":155,
+  "phoneNumber":"+1 804 123 5648",
+  "isMember":true
+}
+
+{"id":"8",
+  "name":"bonbon",
+  "breed":"b",
+  "dob":"c",
+  "availableForAdoption":false,
+  "rescueStory":"r"
+}
