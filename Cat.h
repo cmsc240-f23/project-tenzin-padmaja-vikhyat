@@ -28,8 +28,7 @@ class Cat
         void setAvailableForAdoption(bool availableForAdoptionParam) { availableForAdoption = availableForAdoptionParam; }
         void setRescueStory(std::string rescueStoryParam) { rescueStory = rescueStoryParam; }
 
-        //fucntion for adopting cat - meanign delete that cat instance 
-        void Adopt();//deleting the cat
+        //void Adopt();//deleting the cat
 
         //convert to JSON
         crow::json::wvalue convertToJson();
@@ -41,7 +40,7 @@ class Cat
         std::string id;
         std::string name;
         std::string breed;
-        std::string dob;
+        std::string dob; //date of birth
         bool availableForAdoption;
         std::string rescueStory;
 };

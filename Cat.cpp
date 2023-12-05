@@ -3,6 +3,8 @@
 using namespace std;
 using namespace crow;
 
+//extern map<string, Cat> CatsMap;
+
 Cat::Cat(json::rvalue readValueJson){
     updateFromJson(readValueJson);
 }
@@ -30,3 +32,10 @@ void Cat::updateFromJson(json::rvalue readValueJson)
     availableForAdoption = readValueJson["availableForAdoption"].b();
     rescueStory = readValueJson["rescueStory"].s();
 }
+
+//repsonse filterAvailableForAdoption(bool availableForAdoption){
+//  vector<Cat> found;
+
+//for ()
+//}
+

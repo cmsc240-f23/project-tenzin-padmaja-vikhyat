@@ -39,7 +39,6 @@ response ResourceAPI<T>::createResource(request req){
     }
 }
 
-//Read All
 template <typename T>
 response ResourceAPI<T>::readAllResources(request req){
     // Create a new JSON write value use to write to the file.
@@ -55,6 +54,56 @@ response ResourceAPI<T>::readAllResources(request req){
 
     return response(jsonWriteValue.dump());
 }
+
+//Read All
+// template <typename T>
+// response ResourceAPI<T>::readAllResources(request req){
+//     // Create a new JSON write value use to write to the file.
+//     json::wvalue jsonWriteValue;
+    
+//     // For each resource in the map, convert it to JSON and add to the write value.
+//     int index = 0;
+
+//     // If there is a isavailforadoption parameter on the request, then filter for vegetarian toppings.
+//     bool filterAdoption = false;
+    
+//     if (req.url_params.get("isAvailableForAdoption"))
+//     {
+//         cout << "Testing true1" << endl;
+        
+//         if (string(req.url_params.get("isAvailableForAdoption")) == "TRUE" || string(req.url_params.get("isAvailableForAdoption")) == "true")
+//         {
+//            filterAdoption = true; 
+//            cout << "Testing true2" << endl;
+//         }
+//     }
+//     //make read all resources for just cats separately
+    
+//     for (pair<string, T> keyValuePair : resourceMap) // if adopted, add it to the list or else don't
+//     {
+//         if (typeid(keyValuePair.second) == typeid(Cat))
+//         {
+//             if (filterAdoption == true){
+//                 if (keyValuePair.second.getAvailableForAdoption()==true){
+//                     jsonWriteValue[index] = keyValuePair.second.convertToJson();
+//                     index++;
+//                 }
+//             }
+//             else{
+//                 jsonWriteValue[index] = keyValuePair.second.convertToJson();
+//                 index++;
+//             }   
+//         }
+//         else
+//         {
+//             jsonWriteValue[index] = keyValuePair.second.convertToJson();
+//             index++;
+//         }
+
+//     }
+
+//     return response(jsonWriteValue.dump());
+// }
 
 //Read specific
 template <typename T>
