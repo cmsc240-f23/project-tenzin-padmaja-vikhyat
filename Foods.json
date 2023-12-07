@@ -1,1 +1,1 @@
-[{"id":"11","qty_g":150,"name":"pizza","cost":142}]
+[{"cost":12,"name":"Cheese Pizza","qty_g":300,"id":"1","catConsumable":"false"},{"catConsumable":"true","id":"11","qty_g":150,"name":"Dried Salmon Bites","cost":14}]

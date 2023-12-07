@@ -46,10 +46,11 @@ template <typename T>
 response ResourceAPI<T>::readAllResources(request req){
     // Create a new JSON write value use to write to the file.
     json::wvalue jsonWriteValue;
-    
     int index = 0;
 
     if (req.url_params.get("catConsumable")){
+        string clientFilter = req.url_params.get("catConsumable");
+        cout << "Found a cat consumable filter request" << endl;
         try{
             // For each resource in the map, convert it to JSON and add to the write value.
             json::wvalue thisResource;
@@ -58,7 +59,8 @@ response ResourceAPI<T>::readAllResources(request req){
             {   
                 thisResource = keyValuePair.second.convertToJson();
                 keys = thisResource.keys();
-                if ((find(keys.begin(), keys.end(), "catConsumable") != keys.end())&&(thisResource.execute([)"catConsumable"]=="true")){
+                cout << "cat consumable eval:" << thisResource.execute("catConsumable") << endl;
+                if (thisResource.execute("catConsumable")==clientFilter){
                     jsonWriteValue[index] = keyValuePair.second.convertToJson();
                     index++;
                 }

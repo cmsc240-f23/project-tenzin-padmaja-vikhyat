@@ -28,8 +28,38 @@ Custoemr example:
 
 Food example:
 {"id":"11",
-  "name":"Rohan",
-  "email":"rohan@jmail.com",
-  "cost":142,
+  "name":"Dried Salmon Bites",
+  "cost":14,
+  "catConsumable":true,
   "qty_g":150
 }
+
+{"id":"1",
+  "name":"Cheese Pizza",
+  "cost":12,
+  "catConsumable":false,
+  "qty_g":300
+}
+
+
+drinks example:
+{"id":"2",
+  "name":"Milk",
+  "cost":10,
+  "catConsumable":true,
+  "qty_ml":155
+}
+
+{"id":"2",
+  "name":"Hot Chocolate with Marshmellow",
+  "cost":10,
+  "catConsumable":false,
+  "qty_ml":155
+}
+
+Filter example:
+{
+  "catConsumable":true
+}
+
+foods?catConsumable="true"
