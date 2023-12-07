@@ -22,6 +22,7 @@ TEST_CASE("Testing Cat Class")
         CHECK (testCat.getDob() == "12/29/2022" );
         CHECK (testCat.getAvailableForAdoption() == true );
         CHECK (testCat.getRescueStory() == "This kitty was rescued from a trash outside a grocery store. Her eyes and nose were stuck shut with mucus and it was a really cold winter night when we found her." );
+    
     }
 
     // Testing convertToJson method

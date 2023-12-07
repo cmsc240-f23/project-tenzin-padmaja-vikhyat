@@ -14,6 +14,11 @@ class Customer
 
         //getter
         std::string getId() const { return id; }
+        std::string getName() const { return name; }
+        std::string getEmail() const { return email; }
+        bool getIsMember() const { return isMember; }
+        int getNumOfVisits() const { return numberOfVisits; }
+        std::string getPhoneNum() const { return phoneNumber; }
         
         //setter
         void setId(std::string idParam) { id = idParam; }

@@ -58,7 +58,7 @@ response ResourceAPI<T>::readAllResources(request req){
             {   
                 thisResource = keyValuePair.second.convertToJson();
                 keys = thisResource.keys();
-                if (thisResource.execute("catConsumable")=="true"){
+                if ((find(keys.begin(), keys.end(), "catConsumable") != keys.end())&&(thisResource.execute([)"catConsumable"]=="true")){
                     jsonWriteValue[index] = keyValuePair.second.convertToJson();
                     index++;
                 }

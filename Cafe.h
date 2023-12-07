@@ -7,7 +7,6 @@
 
 #include <vector>
 #include "Cat.h"
-#include "Customer.h"
 
 // #include "Food.h"
 // #include "Drink.h"
@@ -21,12 +20,14 @@ class Cafe
         
         // getters
         std::string getId() const { return id; }
+        std::string getName() const { return name; }
+        std::string getAddress() const { return address; }
+
 
         // setters
         void setId(std::string idParam) { id = idParam; }
-
-        // donate method
-        void donate(float amount) {totalDonation += amount;}
+        void setName(std::string nameParam) { name = nameParam; }
+        void setAddress(std::string addressParam) { name = addressParam; }
 
         //convert to JSON
         crow::json::wvalue convertToJson();
@@ -38,9 +39,8 @@ class Cafe
         std::string id;
         std::string name;
         std::string address;
-        float totalDonation = 0;
-        std::vector<Cat> cats;
-        std::vector<Customer> customers;
+        //std::vector<Cat> cats;
+        //std::vector<Customer> customers;
         // std::vector<Food> foods;
         // std::vector<Drink> drinks;
 };

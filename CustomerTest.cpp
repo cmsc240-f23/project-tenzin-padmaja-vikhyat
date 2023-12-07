@@ -24,7 +24,12 @@ TEST_CASE("Testing Customer Class")
 
         // Check that the constructor properly loaded the values.
         CHECK(testCustomer.getId() == "1");
-        //CHECK(testCafe.getGenre() == "Rock");
+        CHECK(testCustomer.getName() == "Rohan");
+        CHECK(testCustomer.getEmail() == "rohan@jmail.com");
+        CHECK(testCustomer.getNumOfVisits() == 155);
+        CHECK(testCustomer.getPhoneNum() == "+1 804 123 5648");
+        CHECK(testCustomer.getisMember() == true);
+        
     }
 
     // Testing convertToJson method
@@ -47,7 +52,13 @@ TEST_CASE("Testing Customer Class")
 
         // Check the values.
         CHECK(jsonReadValue["id"].s() == "1");
-        //CHECK(jsonReadValue["genre"].s() == "Rock");
+        CHECK(jsonReadValue["name"].s() == "Rohan");
+        CHECK(jsonReadValue["email"].s() == "rohan@jmail.com");
+        CHECK(jsonReadValue["numberOfVisits"].i() == 155);
+        CHECK(jsonReadValue["phoneNumber"].s() == "+1 804 123 5648");
+        CHECK(jsonReadValue["isMember"].b() == true);
+        
+        
     }
         // Testing updateFromJson method
     SUBCASE("Testing updateFromJson Method") 
@@ -75,7 +86,11 @@ TEST_CASE("Testing Customer Class")
 
         // Check the updated values.
         CHECK(testCustomer.getId() == "2");
-        //CHECK(testGenre.getGenre() == "Jazz");
+        CHECK(testCustomer.getName() == "Vishal");
+        CHECK(testCustomer.getEmail() == "vishal@jmail.com");
+        CHECK(testCustomer.getNumOfVisits() == 12);
+        CHECK(testCustomer.getPhoneNum() == "+1 804 123 5667");
+        CHECK(testCustomer.getisMember() == false);
     }
     
 

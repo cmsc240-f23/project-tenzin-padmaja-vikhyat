@@ -11,8 +11,8 @@
 using namespace std;
 using namespace crow;
 
-extern map<std::string, Customer> CustomersMap;
-extern map<std::string, Cat> CatsMap;
+//extern map<std::string, Customer> CustomersMap;
+//extern map<std::string, Cat> CatsMap;
 
 Cafe::Cafe(json::rvalue readValueJson){
     updateFromJson(readValueJson);
@@ -23,18 +23,19 @@ json::wvalue Cafe::convertToJson(){
     writeJson["id"] = id;
     writeJson["name"] = name;
     writeJson["address"] = address;
+
     // writeJson["cats"] = catVector;
     //writeJson["foods"] = foodVector;
     //writeJson["drinks"] = drinkVector;
    
-    writeJson["totalDonation"] = totalDonation;
+    //writeJson["totalDonation"] = totalDonation;
     //writeJson["customers"] = customerVector;
     
-    int index4 = 0;
-    for (Cat cat : cats) 
-    {
-        writeJson["cats"][index4]["id"] = cat.getId();
-    }
+    // int index4 = 0;
+    // for (Cat cat : cats) 
+    // {
+    //     writeJson["cats"][index4]["id"] = cat.getId();
+    // }
 
     // int index5 = 0;
     // for (Customer customer : customers) 
@@ -66,7 +67,8 @@ json::wvalue Cafe::convertToJson(){
 void Cafe::updateFromJson(json::rvalue readValueJson) {
     id = readValueJson["id"].s();
     name = readValueJson["name"].s();
-    totalDonation= readValueJson["totalDonation"].d();
+    address = readValueJson["address"].s();
+    //totalDonation= readValueJson["totalDonation"].d();
 
     // for (json::rvalue foodReadValueJson: readValueJson["foods"])
     // {
