@@ -71,17 +71,18 @@ Customers can place orders for items like foods and drinks.
 | Foods | api/foods/\<string\>         | GET                      |                                 | Status: 200 OK, Body: JSON representation of food info | 404 for not found food with given ID |
 | Foods | api/foods/\<string\>         | PUT                      | JSON representation of food info | Status: 200 OK, Body: JSON representation of food info | Status: 404 food with given ID not found OR 400 Bad Request (body JSON did not match the resource structure) |
 | Foods | api/foods/\<string\>         | DELETE                   |                                 | Status: 200 OK          | 404 for not found food with given ID |
+| Foods | api/foods | GET                      |  {"catConsumable"="true"}                    | Status: 200 OK, Body: JSON representation of all cat-eligible foods | |
 | Drinks | api/drinks                    | POST (after rescue)      | JSON representation of drink info | Status: 201 created, Body: JSON representation of drink info | 400 Bad Request (body JSON did not match the resource structure) |
 | Drinks | api/drinks                    | GET                      |                                 | Status: 200 OK, Body: JSON representation of all drinks' info | |
 | Drinks | api/drinks/\<string\>         | GET                      |                                 | Status: 200 OK, Body: JSON representation of drink info | 404 for not found drink with given ID |
 | Drinks | api/drinks/\<string\>         | PUT                      | JSON representation of drink info | Status: 200 OK, Body: JSON representation of drink info | Status: 404 drink with given ID not found OR 400 Bad Request (body JSON did not match the resource structure) |
 | Drinks | api/drinks/\<string\>         | DELETE                   |                                 | Status: 200 OK          | 404 for not found drink with given ID |
-| Cafe | api/donate               | POST                     || Body: Confirmation message, Status: 201 Created                 | |
+| Drinks | api/drinks | GET                      |  {"catConsumable"="true"}                    | Status: 200 OK, Body: JSON representation of all cat-eligible drinks | |
 | Cafe | api/cafe                    | GET                      |                                 | Status: 200 OK, Body: JSON representation of cafe info | |
 | Cafe | api/cafe                    | PUT                      | JSON representation of cafe info | Status: 200 OK, Body: JSON representation of cafe info | Status: 400 Bad Request (body JSON did not match the resource structure) |
-| Cafe | api/cafe?search... | GET                      |                                 | Status: 200 OK, Body: JSON representation of adoptable cats | |
-| Cafe | api/cafe?search... | GET                      |                                 | Status: 200 OK, Body: JSON representation of cat-eligible foods | |
-| Cafe | api/cafe?search... | GET                      |                                 | Status: 200 OK, Body: JSON representation of cat-eligible drinks | |
+| Cafe | api/donate               | POST                     || Body: Confirmation message, Status: 201 Created                 | |
+
+
 
 ## UML Diagrams
 https://lucid.app/lucidchart/e911c24f-67c7-4dc6-ae56-0fa3b6845f79/edit?viewport_loc=-11%2C-11%2C1365%2C613%2C0_0&invitationId=inv_bc88ed82-1500-4f1f-9d53-81b338255736 

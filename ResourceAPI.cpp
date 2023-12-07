@@ -6,6 +6,8 @@
 #include "Food.h"
 #include "Drink.h"
 // #include "Consumable.h"
+#include <vector>
+#include <string>
 
 using namespace std;
 using namespace crow;
@@ -39,13 +41,36 @@ response ResourceAPI<T>::createResource(request req){
     }
 }
 
+//Read All
 template <typename T>
 response ResourceAPI<T>::readAllResources(request req){
     // Create a new JSON write value use to write to the file.
     json::wvalue jsonWriteValue;
     
-    // For each resource in the map, convert it to JSON and add to the write value.
     int index = 0;
+
+    if (req.url_params.get("catConsumable")){
+        try{
+            // For each resource in the map, convert it to JSON and add to the write value.
+            json::wvalue thisResource;
+            vector<string> keys;
+            for (pair<string, T> keyValuePair : resourceMap)
+            {   
+                thisResource = keyValuePair.second.convertToJson();
+                keys = thisResource.keys();
+                if (thisResource.execute("catConsumable")=="true"){
+                    jsonWriteValue[index] = keyValuePair.second.convertToJson();
+                    index++;
+                }
+            }
+            return response(jsonWriteValue.dump());
+        }
+        catch (exception& e){
+            return response(400, "The given resource does not have an attribute catConsumable");
+        }
+    }
+
+    // For each resource in the map, convert it to JSON and add to the write value.
     for (pair<string, T> keyValuePair : resourceMap)
     {
         jsonWriteValue[index] = keyValuePair.second.convertToJson();
@@ -54,56 +79,6 @@ response ResourceAPI<T>::readAllResources(request req){
 
     return response(jsonWriteValue.dump());
 }
-
-//Read All
-// template <typename T>
-// response ResourceAPI<T>::readAllResources(request req){
-//     // Create a new JSON write value use to write to the file.
-//     json::wvalue jsonWriteValue;
-    
-//     // For each resource in the map, convert it to JSON and add to the write value.
-//     int index = 0;
-
-//     // If there is a isavailforadoption parameter on the request, then filter for vegetarian toppings.
-//     bool filterAdoption = false;
-    
-//     if (req.url_params.get("isAvailableForAdoption"))
-//     {
-//         cout << "Testing true1" << endl;
-        
-//         if (string(req.url_params.get("isAvailableForAdoption")) == "TRUE" || string(req.url_params.get("isAvailableForAdoption")) == "true")
-//         {
-//            filterAdoption = true; 
-//            cout << "Testing true2" << endl;
-//         }
-//     }
-//     //make read all resources for just cats separately
-    
-//     for (pair<string, T> keyValuePair : resourceMap) // if adopted, add it to the list or else don't
-//     {
-//         if (typeid(keyValuePair.second) == typeid(Cat))
-//         {
-//             if (filterAdoption == true){
-//                 if (keyValuePair.second.getAvailableForAdoption()==true){
-//                     jsonWriteValue[index] = keyValuePair.second.convertToJson();
-//                     index++;
-//                 }
-//             }
-//             else{
-//                 jsonWriteValue[index] = keyValuePair.second.convertToJson();
-//                 index++;
-//             }   
-//         }
-//         else
-//         {
-//             jsonWriteValue[index] = keyValuePair.second.convertToJson();
-//             index++;
-//         }
-
-//     }
-
-//     return response(jsonWriteValue.dump());
-// }
 
 //Read specific
 template <typename T>

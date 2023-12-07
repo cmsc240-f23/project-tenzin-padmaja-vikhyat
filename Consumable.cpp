@@ -19,6 +19,7 @@ json::wvalue Consumable::convertToJson()
     writeJson["name"] = name;
     writeJson["cost"] = cost;
     writeJson["id"] = id;
+    writeJson["catConsumable"] = (catConsumable ? "true" : "false");
 
     return writeJson;
 }
@@ -30,4 +31,5 @@ void Consumable::updateFromJson(json::rvalue readValueJson)
     name = readValueJson["name"].s();
     cost = readValueJson["cost"].i();
     id = readValueJson["id"].s();
+    catConsumable = readValueJson["catConsumable"].b();
 }
