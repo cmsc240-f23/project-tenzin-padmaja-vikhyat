@@ -72,7 +72,7 @@ map<string, T> loadFromFile(string filename)
         }
         catch(const std::exception& e)
         {
-            std::cerr << "Could not read file" << filename << '\n';
+            std::cerr << "Could not read file: " << filename << '\n';
         }
     }
     return data;

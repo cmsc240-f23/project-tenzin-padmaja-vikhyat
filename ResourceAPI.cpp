@@ -1,11 +1,10 @@
 #include <crow.h>
 #include "ResourceAPI.h"
 #include "Cat.h"
-// #include "Cafe.h"
+#include "Cafe.h"
 #include "Customer.h"
 #include "Food.h"
 #include "Drink.h"
-// #include "Consumable.h"
 #include <vector>
 #include <string>
 
@@ -47,10 +46,10 @@ response ResourceAPI<T>::readAllResources(request req){
     // Create a new JSON write value use to write to the file.
     json::wvalue jsonWriteValue;
     int index = 0;
+    string catConsumable_i;
 
     if (req.url_params.get("catConsumable")){
         string clientFilter = req.url_params.get("catConsumable");
-        cout << "Found a cat consumable filter request" << endl;
         try{
             // For each resource in the map, convert it to JSON and add to the write value.
             json::wvalue thisResource;
@@ -58,9 +57,8 @@ response ResourceAPI<T>::readAllResources(request req){
             for (pair<string, T> keyValuePair : resourceMap)
             {   
                 thisResource = keyValuePair.second.convertToJson();
-                keys = thisResource.keys();
-                cout << "cat consumable eval:" << thisResource.execute("catConsumable") << endl;
-                if (thisResource.execute("catConsumable")==clientFilter){
+                catConsumable_i = (thisResource["catConsumable"].dump()=="\"true\"" ? "true" : "false");
+                if (catConsumable_i==clientFilter){
                     jsonWriteValue[index] = keyValuePair.second.convertToJson();
                     index++;
                 }
@@ -159,7 +157,7 @@ response ResourceAPI<T>::deleteResource(string id){
 }
 
 template class ResourceAPI<Cat>;
-// template class ResourceAPI<Cafe>;
+template class ResourceAPI<Cafe>;
 template class ResourceAPI<Customer>;
 template class ResourceAPI<Food>;
 template class ResourceAPI<Drink>;

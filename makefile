@@ -21,7 +21,7 @@ Food.o: Food.cpp Food.h Consumable.h
 Drink.o: Drink.cpp Drink.h Consumable.h
 	g++ -Wall -c Drink.cpp 
 
-ResourceAPI.o: ResourceAPI.cpp ResourceAPI.h Cat.h Cafe.h Customer.h Food.h Drink.h Consumable.h
+ResourceAPI.o: ResourceAPI.cpp ResourceAPI.h Cat.h Cafe.h Customer.h Food.h Drink.h
 	g++ -Wall -c ResourceAPI.cpp 
 
 # ResourceAPITest: ResourceAPITest.cpp ResourceAPI.o Cat.o Cafe.o Customer.o Consumable.o Food.o Drink.o
