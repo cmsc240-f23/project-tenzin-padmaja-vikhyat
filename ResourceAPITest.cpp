@@ -496,7 +496,33 @@ TEST_CASE("Reading Food resources filtered by cat consumable true")
     response res = ResourceAPI<Food>::readAllResources(req);
 
     // Create the expected reponse body
-    string expectedResponseBody = R"([{"catConsumable":true,"id":"1","qty_g":300,"name":"Salmon bites","cost":12.5},{"cost":5.5,"name":"Egg Rolls","qty_g":300,"id":"2","catConsumable":false},{"catConsumable":false,"id":"3","qty_g":250,"name":"Aloo Paratha","cost":15.5}])";
+    string expectedResponseBody = R"([{"catConsumable":true,"id":"1","qty_g":300,"name":"Salmon bites","cost":12.5}])";
+
+    // Check the results
+    CHECK(res.code == 200); // Check that the response code is 200 Ok
+    CHECK(res.body == expectedResponseBody); // Validate the reponse body
+    CHECK(ResourceAPI<Food>::resourceMap.size() == 3); // Ensure that no resources were added or removed from the map
+}
+
+TEST_CASE("Reading Food resources filtered by cat consumable false") 
+{
+    // Load resources to read.
+    FoodsMap["1"] = Food{json::load(R"({"id":"1","name":"Salmon bites","cost":12.5,"catConsumable":true,"qty_g":300})")};
+    FoodsMap["2"] = Food{json::load(R"({"id":"2","name":"Egg Rolls","cost":5.5,"catConsumable":false,"qty_g":300})")};
+    FoodsMap["3"] = Food{json::load(R"({"id":"3","name":"Aloo Paratha","cost":15.5,"catConsumable":false,"qty_g":250})")};
+
+    // Setup resource map to be empty before the test
+    ResourceAPI<Food>::resourceMap = FoodsMap;
+
+    // Setup request object
+    request req;
+    req.url_params = query_string("?catConsumable=false");
+
+    // Perform the action
+    response res = ResourceAPI<Food>::readAllResources(req);
+
+    // Create the expected reponse body
+    string expectedResponseBody = R"([{"cost":5.5,"name":"Egg Rolls","qty_g":300,"id":"2","catConsumable":false},{"catConsumable":false,"id":"3","qty_g":250,"name":"Aloo Paratha","cost":15.5}])";
 
     // Check the results
     CHECK(res.code == 200); // Check that the response code is 200 Ok
