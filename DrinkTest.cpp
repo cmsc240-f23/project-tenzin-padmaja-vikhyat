@@ -14,12 +14,7 @@ TEST_CASE("Testing Drink Class")
     SUBCASE("Testing the Drink Constructor") 
     {
         // Create a new Drink class from json.
-        Drink testDrink(json::load(R"({"id":"2",
-                                      "name":"Milk",
-                                      "cost":10,
-                                      "catConsumable":"true",
-                                      "qty_ml":"155"
-                                    })"));
+        Drink testDrink(json::load(R"({"id":"2", "name":"Milk", "cost":10, "catConsumable":true, "qty_ml":155})"));
         
         // Check that the constructor properly loaded the values.
         CHECK(testDrink.getId() == "2");
@@ -34,12 +29,7 @@ TEST_CASE("Testing Drink Class")
     SUBCASE("Testing the convertToJson Method") 
     {
         // Create a new Drink class from json.
-        Drink testDrink(json::load(R"("id":"2",
-                                      "name":"Milk",
-                                      "cost":10,
-                                      "catConsumable":"true",
-                                      "qty_ml":"155"
-                                    })"));
+        Drink testDrink(json::load(R"({"id":"2", "name":"Milk", "cost":10, "catConsumable":true, "qty_ml":155})"));
 
 
         // Convert the Drink class to json using the convertToJson method.
@@ -51,7 +41,7 @@ TEST_CASE("Testing Drink Class")
         // Check the values.
         CHECK(jsonReadValue["id"].s() == "2");
         CHECK(jsonReadValue["name"].s() == "Milk");
-        CHECK (jsonReadValue["cost"].f() == 10);
+        CHECK (jsonReadValue["cost"].d() == 10);
         CHECK (jsonReadValue["catConsumable"].b() == true);
         CHECK (jsonReadValue["qty_ml"].i() == 155);
     
@@ -61,20 +51,10 @@ TEST_CASE("Testing Drink Class")
     SUBCASE("Testing updateFromJson Method") 
     {
         // Create a new Drink class from json.
-        Drink testDrink(json::load(R"({"id":"2",
-                                    "name":"Milk",
-                                    "cost":10,
-                                    "catConsumable":"true",
-                                    "qty_ml":"155"
-                                  })"));
+        Drink testDrink(json::load(R"({"id":"2", "name":"Milk", "cost":10, "catConsumable":true, "qty_ml":155})"));
 
         // Create the update json.
-        json::rvalue updateJson = json::load(R"({"id":"2",
-                                              "name":"Hot Chocolate with Marshmellow",
-                                              "cost":10,
-                                              "catConsumable":"false",
-                                              "qty_ml":"155"
-                                            })");
+        json::rvalue updateJson = json::load(R"({"id":"2", "name":"Hot Chocolate with Marshmellow", "cost":10, "catConsumable":false, "qty_ml":155})");
 
         // Update the Drink with the updateFromJson method. 
         testDrink.updateFromJson(updateJson);

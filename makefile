@@ -27,9 +27,12 @@ ResourceAPI.o: ResourceAPI.cpp ResourceAPI.h Cat.h Cafe.h Customer.h Food.h Drin
 # ResourceAPITest: ResourceAPITest.cpp ResourceAPI.o Cat.o Cafe.o Customer.o Consumable.o Food.o Drink.o
 # 	g++ -lpthread ResourceAPITest.cpp ResourceAPI.o Cat.o Cafe.o Customer.o Consumable.o Food.o Drink.o -o ResourceAPITest
 
-# FileIOTest: FileIOTest.cpp FileIO.h Cat.o
-# 	g++ -lpthread FileIOTest.cpp Cat.o -o FileIOTest
+FileIOTest: FileIOTest.cpp FileIO.h Cat.o
+	g++ -lpthread FileIOTest.cpp Cat.o -o FileIOTest
 
+CafeTest: CafeTest.cpp Cafe.o
+	g++ -lpthread CafeTest.cpp Cafe.o -o CafeTest
+	
 CatTest: CatTest.cpp Cat.o
 	g++ -lpthread CatTest.cpp Cat.o -o CatTest
 
@@ -42,17 +45,20 @@ FoodTest: FoodTest.cpp Food.o
 DrinkTest: DrinkTest.cpp Drink.o
 	g++ -lpthread DrinkTest.cpp Drink.o Consumable.o -o DrinkTest
 
-run-unit-tests: CatTest FoodTest #ResourceAPITest FileIOTest
-#	./ResourceAPITest    ;\
-#	./FileIOTest	
+run-unit-tests: FileIOTest CafeTest CatTest CustomerTest FoodTest DrinkTest #ResourceAPITest 
+	./FileIOTest	
+	./CafeTest ;\
 	./CatTest ;\
-	./FoodTest
+	./CustomerTest ;\
+	./FoodTest ;\
+	./DrinkTest ;\
+#	./ResourceAPITest  
 
 static-analysis:
 	cppcheck *.cpp
 
 clean:
-	rm -f *.o CatCafeAPI ResourceAPITest FileIOTest CatTest FoodTest DrinkTest CustomerTest
+	rm -f *.o CatCafeAPI FileIOTest CatTest CustomerTest FoodTest DrinkTest ResourceAPITest
 
 clear-data:
 	rm -f *.json

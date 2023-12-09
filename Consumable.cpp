@@ -19,7 +19,7 @@ json::wvalue Consumable::convertToJson()
     writeJson["name"] = name;
     writeJson["cost"] = cost;
     writeJson["id"] = id;
-    writeJson["catConsumable"] = (catConsumable ? "true" : "false");
+    writeJson["catConsumable"] = (catConsumable ? true : false);
 
     return writeJson;
 }

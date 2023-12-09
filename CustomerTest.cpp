@@ -12,13 +12,7 @@ TEST_CASE("Testing Customer Class")
     SUBCASE("Testing the Customer Constructor") 
     {
         // Create a new Consumable class from json.
-        Customer testCustomer(json::load(R"({"id":"1",
-                                            "name":"Rohan",
-                                            "email":"rohan@jmail.com",
-                                            "numberOfVisits":155,
-                                            "phoneNumber":"+1 804 123 5648",
-                                            "isMember":"true"
-                                            })"));
+        Customer testCustomer(json::load(R"({"id":"1","name":"Rohan", "email":"rohan@jmail.com", "numberOfVisits":155,"phoneNumber":"+1 804 123 5648", "isMember":true })"));
 
         // Check that the constructor properly loaded the values.
         CHECK(testCustomer.getId() == "1");
@@ -26,7 +20,7 @@ TEST_CASE("Testing Customer Class")
         CHECK(testCustomer.getEmail() == "rohan@jmail.com");
         CHECK(testCustomer.getNumOfVisits() == 155);
         CHECK(testCustomer.getPhoneNum() == "+1 804 123 5648");
-        CHECK(testCustomer.getisMember() == true);
+        CHECK(testCustomer.getIsMember() == true);
         
     }
 
@@ -34,13 +28,7 @@ TEST_CASE("Testing Customer Class")
     SUBCASE("Testing the convertToJson Method") 
     {
         // Create a new Cafe class from json.
-        Customer testCustomer(json::load(R"({"id":"11",
-  "name":"Rohan",
-  "email":"rohan@jmail.com",
-  "numberOfVisits":155,
-  "phoneNumber":"+1 804 123 5648",
-  "isMember":"true"
-})"));
+        Customer testCustomer(json::load(R"({"id":"1","name":"Rohan", "email":"rohan@jmail.com", "numberOfVisits":155,"phoneNumber":"+1 804 123 5648", "isMember":true })"));
 
         // Convert the Genre class to json using the convertToJson method.
         json::wvalue jsonOutput = testCustomer.convertToJson();
@@ -62,22 +50,10 @@ TEST_CASE("Testing Customer Class")
     SUBCASE("Testing updateFromJson Method") 
     {
         // Create a new Customer class from json.
-        Customer testCustomer(json::load(R"({"id":"1",
-  "name":"Rohan",
-  "email":"rohan@jmail.com",
-  "numberOfVisits":155,
-  "phoneNumber":"+1 804 123 5648",
-  "isMember":"true"
-})"));
+        Customer testCustomer(json::load(R"({"id":"1","name":"Rohan", "email":"rohan@jmail.com", "numberOfVisits":155,"phoneNumber":"+1 804 123 5648", "isMember":true })"));
 
         // Create the update json.
-        json::rvalue updateJson = json::load(R"({"id":"2",
-  "name":"Vishal",
-  "email":"vishal@jmail.com",
-  "numberOfVisits":12,
-  "phoneNumber":"+1 804 123 5667",
-  "isMember":"false"
-})");
+        json::rvalue updateJson = json::load(R"({"id":"2", "name":"Vishal", "email":"vishal@jmail.com", "numberOfVisits":12, "phoneNumber":"+1 804 123 5667", "isMember":false})");
 
         // Update the Customer with the updateFromJson method. 
         testCustomer.updateFromJson(updateJson);
@@ -88,8 +64,6 @@ TEST_CASE("Testing Customer Class")
         CHECK(testCustomer.getEmail() == "vishal@jmail.com");
         CHECK(testCustomer.getNumOfVisits() == 12);
         CHECK(testCustomer.getPhoneNum() == "+1 804 123 5667");
-        CHECK(testCustomer.getisMember() == false);
+        CHECK(testCustomer.getIsMember() == false);
     }
-    
-
 }

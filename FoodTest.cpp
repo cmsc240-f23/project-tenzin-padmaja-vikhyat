@@ -14,7 +14,7 @@ TEST_CASE("Testing Food Class")
     SUBCASE("Testing the Food Constructor") 
     {
         // Create a new Food class from json.
-        Food testFood(json::load(R"({"id":"1","name":"Salmon bites", "cost":"12.50","catConsumable":true, "qty_g":"300"})"));
+        Food testFood(json::load(R"({"id":"1","name":"Salmon bites", "cost":12.50,"catConsumable":true, "qty_g":300})"));
         
         // Check that the constructor properly loaded the values.
         CHECK(testFood.getId() == "1");
@@ -29,7 +29,7 @@ TEST_CASE("Testing Food Class")
     SUBCASE("Testing the convertToJson Method") 
     {
         // Create a new Food class from json.
-        Food testFood(json::load(R"({"id":"1","name":"Salmon bites", "cost":12.50,"catConsumable":true, "qty_g":"300"})"));
+        Food testFood(json::load(R"({"id":"1","name":"Salmon bites", "cost":12.50,"catConsumable":true, "qty_g":300})"));
 
 
         // Convert the Food class to json using the convertToJson method.
@@ -50,7 +50,7 @@ TEST_CASE("Testing Food Class")
     SUBCASE("Testing updateFromJson Method") 
     {
         // Create a new Food class from json.
-        Food testFood(json::load(R"({"id":"1","name":"Salmon bites", "cost":"12.50","catConsumable":true, "qty_g":300})"));
+        Food testFood(json::load(R"({"id":"1","name":"Salmon bites", "cost":12.50,"catConsumable":true, "qty_g":300})"));
 
         // Create the update json.
         json::rvalue updateJson = json::load(R"({"id":"12","name":"Egg Rolls", "cost":5.50,"catConsumable":false, "qty_g":300})");
@@ -62,7 +62,7 @@ TEST_CASE("Testing Food Class")
         CHECK(testFood.getId() == "12");
         CHECK(testFood.getName() == "Egg Rolls");
         CHECK(testFood.getCost() == 5.50);
-        CHECK (testFood.getCatConsumable() == false );
+        CHECK (testFood.getCatConsumable() == false);
         CHECK (testFood.getQtyG() == 300 );   
     }
 

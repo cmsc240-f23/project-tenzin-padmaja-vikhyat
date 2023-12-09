@@ -7,8 +7,6 @@
 using namespace std;  
 using namespace crow;  
 
-
-
 TEST_CASE("Testing Cafe Class") 
 {
     SUBCASE("Testing the Cafe Constructor") 
