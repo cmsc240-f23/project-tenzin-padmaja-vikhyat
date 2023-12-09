@@ -478,7 +478,7 @@ TEST_CASE("Reading all Food resources")
     CHECK(ResourceAPI<Food>::resourceMap.size() == 3); // Ensure that no resources were added or removed from the map
 }
 
-TEST_CASE("Reading Food resources filtered by cat consumable") 
+TEST_CASE("Reading Food resources filtered by cat consumable true") 
 {
     // Load resources to read.
     FoodsMap["1"] = Food{json::load(R"({"id":"1","name":"Salmon bites","cost":12.5,"catConsumable":true,"qty_g":300})")};
