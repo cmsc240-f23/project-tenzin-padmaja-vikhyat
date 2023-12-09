@@ -30,27 +30,28 @@ The web service will:
 - Provide the client a list of all existing cats
 - Receive (from client) and store details of donations made by customers
 - Receive (from client) and store details of cats rescued and added to cafe
-- Review and accept/reject requests (from client) to adopt a cat; remove cat data if successful
+- Review and accept/reject requests (from client) to adopt a cat; remove cat data from the cafe
 - Receive (from client) and store details of transactions made at the cafe
 - Recall details of transactions made, given the transaction ID by client
 
 ## Use Case Description
 
-The client can fetch the list of all existing cats, particularly their names and IDs.
-If a customer asks for more info about a particular cat, the client can fetch all the specific details for that particular cat using its ID.
-If the customer wants to adopt the cat, the client can request an adoption for that client, which will get approved if the cat is adoptable.
-Customers can choose to donate to the cafe’s funds.
-Customers can place orders for items like foods and drinks.
+The client can fetch the list of all existing cats/customers/foods/drinks, particularly their names and IDs.
+If the client wants more info about a particular cat/customer/food/drink, the client can fetch all the specific details for that particular resource using its ID.
+If a customer at the cafe has 'adopted' a cat, the client can request an adoption by deleting the cat from the list of cats in the cafe. 
+Similarly, the client can delete information on any customer/food/drink.
+Information on any cat/customer/food/drink can be updated.
+A customer can filter food and drinks based on whether or not they are consumable by cats.
 
 ## List Of Resources
 
 | Resource | Description |
 | :---: | :--- |
-| Cafe         | cafe’s information like name, address, donations, transactions, and availability of drinks, food, and cats |
+| Cafe         | cafe’s information like name, address, email |
 | Cat          | provides a list of cats with their info (name, breed, age, adoptability, ...). It also allows customers to adopt cats. |
 | Customer     | information about customer like name, email, phone number, membership status |
-| Drink       | drinks options and the prices associated with it |
-| Food         | food options and the prices associated with it |
+| Drink       | drinks options with quantity and the prices associated with it |
+| Food         | food options with quantity and the prices associated with it |
 
 ## List of End Points
 
@@ -80,9 +81,10 @@ Customers can place orders for items like foods and drinks.
 | Drinks | api/drinks?catConsumable=<true/false> | GET                      |  | Status: 200 OK, Body: JSON representation of all cat-eligible drinks | |
 | Cafe | api/cafe                    | GET                      |                                 | Status: 200 OK, Body: JSON representation of cafe info | |
 | Cafe | api/cafe                    | PUT                      | JSON representation of cafe info | Status: 200 OK, Body: JSON representation of cafe info | Status: 400 Bad Request (body JSON did not match the resource structure) |
-| Cafe | api/donate               | POST                     || Body: Confirmation message, Status: 201 Created                 | |
+
 
 
 
 ## UML Diagrams
 https://lucid.app/lucidchart/e911c24f-67c7-4dc6-ae56-0fa3b6845f79/edit?viewport_loc=-11%2C-11%2C1365%2C613%2C0_0&invitationId=inv_bc88ed82-1500-4f1f-9d53-81b338255736 
+![Cat Cafe API UML Diagram](UML_Diagram.png)

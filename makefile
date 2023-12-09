@@ -1,4 +1,4 @@
-all: CatCafeAPI run-unit-tests #static-analysis 
+all: CatCafeAPI run-unit-tests static-analysis 
 
 CatCafeAPI: CatCafeAPI.o Cat.o Cafe.o Customer.o Food.o Drink.o Consumable.o ResourceAPI.o 
 	g++ -lpthread -Wall CatCafeAPI.o Cat.o Cafe.o Customer.o Food.o Drink.o Consumable.o ResourceAPI.o -o CatCafeAPI
@@ -45,9 +45,14 @@ FoodTest: FoodTest.cpp Food.o
 DrinkTest: DrinkTest.cpp Drink.o
 	g++ -lpthread -Wall DrinkTest.cpp Drink.o Consumable.o -o DrinkTest
 
-run-unit-tests: ResourceAPITest #FileIOTest CafeTest CatTest CustomerTest FoodTest DrinkTest 
-	./ResourceAPITest 
-#./FileIOTest ./CafeTest ./CatTest ./CustomerTest ./FoodTest ./DrinkTest 
+run-unit-tests: ResourceAPITest FileIOTest CafeTest CatTest CustomerTest FoodTest DrinkTest 
+	./ResourceAPITest ;\
+	./FileIOTest ;\
+	./CafeTest ;\
+	./CatTest ;\
+	./CustomerTest ;\
+	./FoodTest ;\
+	./DrinkTest 
 
 static-analysis:
 	cppcheck *.cpp
