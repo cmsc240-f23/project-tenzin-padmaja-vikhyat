@@ -315,7 +315,7 @@ TEST_CASE("Creating a new Customer resource")
     CHECK(ResourceAPI<Customer>::resourceMap.at("1").getEmail() == "rohan@jmail.com");
     CHECK(ResourceAPI<Customer>::resourceMap.at("1").getNumOfVisits() == 155);
     CHECK(ResourceAPI<Customer>::resourceMap.at("1").getPhoneNum() == "+1 804 123 5648");
-    CHECK(ResourceAPI<Customer>::resourceMap.at("1").getisMember() == true);
+    CHECK(ResourceAPI<Customer>::resourceMap.at("1").getIsMember() == true);
 
 }
 
@@ -395,7 +395,7 @@ TEST_CASE("Updating a Customer resource")
     CHECK(ResourceAPI<Customer>::resourceMap.at("1").getEmail() == "rohan123@jmail.com");
     CHECK(ResourceAPI<Customer>::resourceMap.at("1").getNumOfVisits() == 156);
     CHECK(ResourceAPI<Customer>::resourceMap.at("1").getPhoneNum() == "+1 804 123 5648");
-    CHECK(ResourceAPI<Customer>::resourceMap.at("1").getisMember() == true);
+    CHECK(ResourceAPI<Customer>::resourceMap.at("1").getIsMember() == true);
 }
 
 TEST_CASE("Deleting a Customer resource") 
