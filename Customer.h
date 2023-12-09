@@ -8,11 +8,11 @@
 class Customer
 {
     public:
+        // Constructors
         Customer() {}
         Customer(crow::json::rvalue readValueJson);
-        //void buy(T item)
-
-        //getter
+        
+        // Getters
         std::string getId() const { return id; }
         std::string getName() const { return name; }
         std::string getEmail() const { return email; }
@@ -20,21 +20,26 @@ class Customer
         int getNumOfVisits() const { return numberOfVisits; }
         std::string getPhoneNum() const { return phoneNumber; }
         
-        //setter
+        // Setter
         void setId(std::string idParam) { id = idParam; }
+        void setName(std::string nameParam) { name = nameParam; }
+        void setEmail(std::string emailParam) { email = emailParam; }
+        void setIsMember(bool memberParam) { isMember = memberParam; }
+        void setNumOfVisits(int numOfVisitsParam) { numberOfVisits = numOfVisitsParam; }
+        void setPhoneNum(std::string phoneNumberParam) {  phoneNumber = phoneNumberParam; }
 
-        //convert to JSON
+        // Convert to JSON
         crow::json::wvalue convertToJson();
 
         //update from JSON
         void updateFromJson(crow::json::rvalue readValueJson);
+
     private:
         std::string name;
         std::string email;
         std::string id;
         bool isMember;
         int numberOfVisits;
-        //vector <T> purchasedItems;
         std::string phoneNumber;
 
 };

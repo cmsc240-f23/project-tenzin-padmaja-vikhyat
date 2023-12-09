@@ -29,7 +29,7 @@ void Consumable::updateFromJson(json::rvalue readValueJson)
 {
     // Update Record-specific details
     name = readValueJson["name"].s();
-    cost = readValueJson["cost"].i();
+    cost = readValueJson["cost"].d(); // Convert to double
     id = readValueJson["id"].s();
     catConsumable = readValueJson["catConsumable"].b();
 }

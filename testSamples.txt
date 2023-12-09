@@ -58,8 +58,4 @@ drinks example:
 }
 
 Filter example:
-{
-  "catConsumable":true
-}
-
-foods?catConsumable="true"
+/api/foods?catConsumable=true

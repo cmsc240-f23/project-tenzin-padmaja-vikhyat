@@ -7,20 +7,18 @@
 using namespace std;  
 using namespace crow;  
 
-
-
 TEST_CASE("Testing Customer Class") 
 {
     SUBCASE("Testing the Customer Constructor") 
     {
         // Create a new Consumable class from json.
         Customer testCustomer(json::load(R"({"id":"1",
-  "name":"Rohan",
-  "email":"rohan@jmail.com",
-  "numberOfVisits":155,
-  "phoneNumber":"+1 804 123 5648",
-  "isMember":true
-})"));
+                                            "name":"Rohan",
+                                            "email":"rohan@jmail.com",
+                                            "numberOfVisits":155,
+                                            "phoneNumber":"+1 804 123 5648",
+                                            "isMember":"true"
+                                            })"));
 
         // Check that the constructor properly loaded the values.
         CHECK(testCustomer.getId() == "1");
@@ -41,7 +39,7 @@ TEST_CASE("Testing Customer Class")
   "email":"rohan@jmail.com",
   "numberOfVisits":155,
   "phoneNumber":"+1 804 123 5648",
-  "isMember":true
+  "isMember":"true"
 })"));
 
         // Convert the Genre class to json using the convertToJson method.
@@ -69,7 +67,7 @@ TEST_CASE("Testing Customer Class")
   "email":"rohan@jmail.com",
   "numberOfVisits":155,
   "phoneNumber":"+1 804 123 5648",
-  "isMember":true
+  "isMember":"true"
 })"));
 
         // Create the update json.
@@ -78,7 +76,7 @@ TEST_CASE("Testing Customer Class")
   "email":"vishal@jmail.com",
   "numberOfVisits":12,
   "phoneNumber":"+1 804 123 5667",
-  "isMember":false
+  "isMember":"false"
 })");
 
         // Update the Customer with the updateFromJson method. 

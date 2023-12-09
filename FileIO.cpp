@@ -7,7 +7,12 @@ using namespace crow;
 
 template <typename T>
 void saveToFile(map<string, T> data, string filename)  
-{
+{   
+    // Don't save file if it's empty
+    if(data.size()==0){
+        return;
+    }
+
     // Open the file for writing
     ofstream file(filename);
 
@@ -26,11 +31,6 @@ void saveToFile(map<string, T> data, string filename)
             index++;
         }
 
-        // // If there were no objects in the map, write an empty JSON value
-        // if (index==0){
-        //     jsonWriteValue = json({});
-        // }
-
         // Write the JSON to the file.
         file << jsonWriteValue.dump();
         file.close();
@@ -39,15 +39,20 @@ void saveToFile(map<string, T> data, string filename)
 
 template <typename T>
 map<string, T> loadFromFile(string filename) 
-{
+{    
     map<string, T> data;
     
-    // Open the file for reading.
-    ifstream file(filename);
+    try{
+        // Open the file for reading.
+        ifstream file(filename);
 
-    // If the file is open. 
-    if (file.is_open()) 
-    {      
+        // Check if the file opens
+        if (!file.is_open()) 
+        {   
+            cout << "File " << filename << " not found" << endl;
+            return data;
+        } 
+
         // Create a stream for reading in the file.
         ostringstream stringStreamJson;
 
@@ -62,18 +67,15 @@ map<string, T> loadFromFile(string filename)
 
         // For each item in the JSON convert it to an object, 
         // and add it to the data map.
-        try
+        for (json::rvalue item : jsonReadValue) 
         {
-            for (json::rvalue item : jsonReadValue) 
-            {
-                T resource{item};
-                data[resource.getId()] = resource;
-            }
-        }
-        catch(const std::exception& e)
-        {
-            std::cerr << "Could not read file: " << filename << '\n';
+            T resource{item};
+            data[resource.getId()] = resource;
         }
     }
+    catch(exception& e){
+        cout << "File load error with " << filename << " : " << e.what() << endl;
+    }
+    
     return data;
 }

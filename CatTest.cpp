@@ -13,7 +13,7 @@ TEST_CASE("Testing Cat Class")
     SUBCASE("Testing the Cat Constructor") 
     {
         // Create a new Cat class from json.
-        Cat testCat(json::load(R"({"id":"1","name":"Moewy", "breed":"Turkish Angora", "dob":"12/29/2022", "availableForAdoption":"true", "rescueStory":"This kitty was rescued from a trash outside a grocery store. Her eyes and nose were stuck shut with mucus and it was a really cold winter night when we found her."})"));
+        Cat testCat(json::load(R"({"id":"1","name":"Meowy", "breed":"Turkish Angora", "dob":"12/29/2022", "availableForAdoption":true, "rescueStory":"This kitty was rescued from a trash outside a grocery store. Her eyes and nose were stuck shut with mucus and it was a really cold winter night when we found her."})"));
         
         // Check that the constructor properly loaded the values.
         CHECK(testCat.getId() == "1");
@@ -29,7 +29,7 @@ TEST_CASE("Testing Cat Class")
     SUBCASE("Testing the convertToJson Method") 
     {
         // Create a new Cat class from json.
-        Cat testCat(json::load(R"({"id":"1","name":"Moewy", "breed":"Turkish Angora", "dob":"12/29/2022", "availableForAdoption":"true", "rescueStory":"This kitty was rescued from a trash outside a grocery store. Her eyes and nose were stuck shut with mucus and it was a really cold winter night when we found her."})"));
+        Cat testCat(json::load(R"({"id":"1","name":"Meowy", "breed":"Turkish Angora", "dob":"12/29/2022", "availableForAdoption":true, "rescueStory":"This kitty was rescued from a trash outside a grocery store. Her eyes and nose were stuck shut with mucus and it was a really cold winter night when we found her."})"));
 
         // Convert the Cat class to json using the convertToJson method.
         json::wvalue jsonOutput = testCat.convertToJson();
@@ -40,8 +40,8 @@ TEST_CASE("Testing Cat Class")
         // Check the values.
         CHECK(jsonReadValue["id"].s() == "1");
         CHECK(jsonReadValue["name"].s() == "Meowy");
-        CHECK (jsonReadValue["breed"].s() == "");
-        CHECK (jsonReadValue["dob"].s() == "");
+        CHECK (jsonReadValue["breed"].s() == "Turkish Angora");
+        CHECK (jsonReadValue["dob"].s() == "12/29/2022");
         CHECK (jsonReadValue["availableForAdoption"].b() == true);
         CHECK (jsonReadValue["rescueStory"].s() == "This kitty was rescued from a trash outside a grocery store. Her eyes and nose were stuck shut with mucus and it was a really cold winter night when we found her.");
     }
@@ -50,10 +50,10 @@ TEST_CASE("Testing Cat Class")
     SUBCASE("Testing updateFromJson Method") 
     {
         // Create a new Cat class from json.
-        Cat testCat(json::load(R"({"id":"1","name":"Moewy", "breed":"Turkish Angora", "dob":"12/29/2022", "availableForAdoption":"true", "rescueStory":"This kitty was rescued from a trash outside a grocery store. Her eyes and nose were stuck shut with mucus and it was a really cold winter night when we found her."})"));
+        Cat testCat(json::load(R"({"id":"1","name":"Meowy", "breed":"Turkish Angora", "dob":"12/29/2022", "availableForAdoption":true, "rescueStory":"This kitty was rescued from a trash outside a grocery store. Her eyes and nose were stuck shut with mucus and it was a really cold winter night when we found her."})"));
 
         // Create the update json.
-        json::rvalue updateJson = json::load(R"({"id":"2","name":"Luna", "breed":"Burmese Cat", "dob":"05/09/2022", "availableForAdoption":"false", "rescueStory":"This kitty was abandoned outside our cafe in a cardboard box and a note that said please adopt me!"})");
+        json::rvalue updateJson = json::load(R"({"id":"2","name":"Luna", "breed":"Burmese Cat", "dob":"05/09/2022", "availableForAdoption":false, "rescueStory":"This kitty was abandoned outside our cafe in a cardboard box and a note that said please adopt me!"})");
 
         // Update the Cat with the updateFromJson method. 
         testCat.updateFromJson(updateJson);

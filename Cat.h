@@ -8,11 +8,11 @@
 class Cat
 {
     public:
-        //Constructors
+        // Constructors
         Cat() {}
         Cat(crow::json::rvalue readValueJson);
 
-        //getters
+        // Getters
         std::string getId() const { return id; }
         std::string getName() const { return name; }
         std::string getBreed() const { return breed; }
@@ -20,7 +20,7 @@ class Cat
         bool getAvailableForAdoption() const { return availableForAdoption; }
         std::string getRescueStory() const { return rescueStory; }
 
-        //setters
+        // Setters
         void setId(std::string idParam) { id = idParam; }
         void setName(std::string nameParam) { name = nameParam; }
         void setBreed(std::string breedParam) { breed = breedParam; }
@@ -28,12 +28,10 @@ class Cat
         void setAvailableForAdoption(bool availableForAdoptionParam) { availableForAdoption = availableForAdoptionParam; }
         void setRescueStory(std::string rescueStoryParam) { rescueStory = rescueStoryParam; }
 
-        //void Adopt();//deleting the cat
-
-        //convert to JSON
+        // Convert to JSON
         crow::json::wvalue convertToJson();
         
-        //Update from JSON
+        // Update from JSON
         void updateFromJson(crow::json::rvalue readValueJson);
 
     private:

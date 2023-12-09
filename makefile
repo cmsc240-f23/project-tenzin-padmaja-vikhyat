@@ -1,4 +1,4 @@
-all: CatCafeAPI static-analysis #run-unit-tests
+all: CatCafeAPI run-unit-tests #static-analysis 
 
 CatCafeAPI: CatCafeAPI.o Cat.o Cafe.o Customer.o Food.o Drink.o Consumable.o ResourceAPI.o 
 	g++ -lpthread -Wall CatCafeAPI.o Cat.o Cafe.o Customer.o Food.o Drink.o Consumable.o ResourceAPI.o -o CatCafeAPI
@@ -12,10 +12,10 @@ Cat.o: Cat.cpp Cat.h
 Cafe.o: Cafe.cpp Cafe.h
 	g++ -Wall -c Cafe.cpp 
 
-Customer.o: Customer.cpp Customer.h
+Customer.o: Customer.cpp Consumable.cpp Customer.h
 	g++ -Wall -c Customer.cpp 
 
-Food.o: Food.cpp Food.h Consumable.h
+Food.o: Food.cpp Food.h Consumable.cpp Consumable.h 
 	g++ -Wall -c Food.cpp 
 
 Drink.o: Drink.cpp Drink.h Consumable.h
@@ -30,19 +30,29 @@ ResourceAPI.o: ResourceAPI.cpp ResourceAPI.h Cat.h Cafe.h Customer.h Food.h Drin
 # FileIOTest: FileIOTest.cpp FileIO.h Cat.o
 # 	g++ -lpthread FileIOTest.cpp Cat.o -o FileIOTest
 
-# CatTest: CatTest.cpp Cat.cpp Cat.h Cat.o
-# 	g++ -lpthread CatTest.cpp Cat.o -o CatTest
+CatTest: CatTest.cpp Cat.o
+	g++ -lpthread CatTest.cpp Cat.o -o CatTest
 
-# run-unit-tests: ResourceAPITest FileIOTest
-# 	./ResourceAPITest    ;\
-# 	./FileIOTest	;\
-# 	./CatTest
+CustomerTest: CustomerTest.cpp Customer.o
+	g++ -lpthread CustomerTest.cpp Customer.o -o CustomerTest
+
+FoodTest: FoodTest.cpp Food.o
+	g++ -lpthread FoodTest.cpp Food.o Consumable.o -o FoodTest
+
+DrinkTest: DrinkTest.cpp Drink.o
+	g++ -lpthread DrinkTest.cpp Drink.o Consumable.o -o DrinkTest
+
+run-unit-tests: CatTest FoodTest #ResourceAPITest FileIOTest
+#	./ResourceAPITest    ;\
+#	./FileIOTest	
+	./CatTest ;\
+	./FoodTest
 
 static-analysis:
 	cppcheck *.cpp
 
 clean:
-	rm -f *.o CatCafeAPI #ResourceAPITest FileIOTest CatTest
+	rm -f *.o CatCafeAPI ResourceAPITest FileIOTest CatTest FoodTest DrinkTest CustomerTest
 
 clear-data:
 	rm -f *.json
