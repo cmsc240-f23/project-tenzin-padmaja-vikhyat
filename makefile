@@ -24,41 +24,35 @@ Drink.o: Drink.cpp Drink.h Consumable.h
 ResourceAPI.o: ResourceAPI.cpp ResourceAPI.h Cat.h Cafe.h Customer.h Food.h Drink.h
 	g++ -Wall -c ResourceAPI.cpp 
 
-# ResourceAPITest: ResourceAPITest.cpp ResourceAPI.o Cat.o Cafe.o Customer.o Consumable.o Food.o Drink.o
-# 	g++ -lpthread ResourceAPITest.cpp ResourceAPI.o Cat.o Cafe.o Customer.o Consumable.o Food.o Drink.o -o ResourceAPITest
+ResourceAPITest: ResourceAPITest.cpp ResourceAPI.o Cat.o Cafe.o Customer.o Consumable.o Food.o Drink.o
+	g++ -lpthread ResourceAPITest.cpp ResourceAPI.o Cat.o Cafe.o Customer.o Consumable.o Food.o Drink.o -o ResourceAPITest
 
 FileIOTest: FileIOTest.cpp FileIO.h Cat.o
-	g++ -lpthread FileIOTest.cpp Cat.o -o FileIOTest
+	g++ -lpthread -Wall FileIOTest.cpp Cat.o -o FileIOTest
 
 CafeTest: CafeTest.cpp Cafe.o
-	g++ -lpthread CafeTest.cpp Cafe.o -o CafeTest
+	g++ -lpthread -Wall CafeTest.cpp Cafe.o -o CafeTest
 	
 CatTest: CatTest.cpp Cat.o
-	g++ -lpthread CatTest.cpp Cat.o -o CatTest
+	g++ -lpthread -Wall CatTest.cpp Cat.o -o CatTest
 
 CustomerTest: CustomerTest.cpp Customer.o
-	g++ -lpthread CustomerTest.cpp Customer.o -o CustomerTest
+	g++ -lpthread -Wall CustomerTest.cpp Customer.o -o CustomerTest
 
 FoodTest: FoodTest.cpp Food.o
-	g++ -lpthread FoodTest.cpp Food.o Consumable.o -o FoodTest
+	g++ -lpthread -Wall FoodTest.cpp Food.o Consumable.o -o FoodTest
 
 DrinkTest: DrinkTest.cpp Drink.o
-	g++ -lpthread DrinkTest.cpp Drink.o Consumable.o -o DrinkTest
+	g++ -lpthread -Wall DrinkTest.cpp Drink.o Consumable.o -o DrinkTest
 
-run-unit-tests: FileIOTest CafeTest CatTest CustomerTest FoodTest DrinkTest #ResourceAPITest 
-	./FileIOTest	
-	./CafeTest ;\
-	./CatTest ;\
-	./CustomerTest ;\
-	./FoodTest ;\
-	./DrinkTest ;\
-#	./ResourceAPITest  
+run-unit-tests: FileIOTest CafeTest CatTest CustomerTest FoodTest DrinkTest ResourceAPITest 
+	./ResourceAPITest ./FileIOTest ./CafeTest ./CatTest ./CustomerTest ./FoodTest ./DrinkTest 
 
 static-analysis:
 	cppcheck *.cpp
 
 clean:
-	rm -f *.o CatCafeAPI FileIOTest CatTest CustomerTest FoodTest DrinkTest ResourceAPITest
+	rm -f *.o CatCafeAPI NewFileIOTest CatTest CustomerTest FoodTest DrinkTest ResourceAPITest
 
 clear-data:
 	rm -f *.json

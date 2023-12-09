@@ -15,13 +15,13 @@ class Consumable
         // Getters
         std::string getId()const { return id; }
         std::string getName()const { return name; }
-        float getCost() const { return cost; }
+        double getCost() const { return cost; }
         bool getCatConsumable() const { return catConsumable; }
 
         // Setters
         void setId(std::string idParam) { id = idParam; }
         void setName(std::string nameParam) { name = nameParam; }
-        void setCost(float costParam) { cost = costParam; }        
+        void setCost(double costParam) { cost = costParam; }        
         void setCatConsumable(int catConsumableParam) { catConsumable = catConsumableParam; }
 
         // Convert to JSON
@@ -33,7 +33,7 @@ class Consumable
     private:
         std::string id;
         std::string name;
-        float cost;
+        double cost;
         bool catConsumable;
 };
 

@@ -11,7 +11,8 @@ class ResourceAPI
     public:
         static std::map<std::string, T> resourceMap;
         static crow::response createResource(crow::request req);
-        static crow::response readAllResources(crow::request req); //here
+        static crow::response readAllResources(); //here
+        static crow::response readAllResourcesFiltered(crow::request req); //here
         static crow::response readResource(std::string id);
         static void updateResource(crow::request req, crow::response& res, std::string id);
         static crow::response deleteResource(std::string id);
