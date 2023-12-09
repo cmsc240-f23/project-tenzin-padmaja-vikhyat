@@ -40,65 +40,78 @@ response ResourceAPI<T>::createResource(request req){
     }
 }
 
-//Read All
-template<typename T> 
-response ResourceAPI<T>::readAllResources() 
-{
-    // Create a new JSON write value use to write to the file.
-    json::wvalue jsonWriteValue;
+// //OLD PERFECT Read All
+// template<typename T> 
+// response ResourceAPI<T>::readAllResources(request req) 
+// {
+//     // Create a new JSON write value use to write to the file.
+//     json::wvalue jsonWriteValue;
     
-    // For each resource in the map, convert the resource to JSON and add to the write value.
-    int index = 0;
-    for (pair<string, T> keyValuePair : resourceMap)
-    {
-        // first: gives you access to the first item in the pair.
-        // second: gives you access to the second item in the pair.
-        jsonWriteValue[index] = keyValuePair.second.convertToJson();
-        index++;
-    }
+//     // For each resource in the map, convert the resource to JSON and add to the write value.
+//     int index = 0;
+//     for (pair<string, T> keyValuePair : resourceMap)
+//     {
+//         // first: gives you access to the first item in the pair.
+//         // second: gives you access to the second item in the pair.
+//         jsonWriteValue[index] = keyValuePair.second.convertToJson();
+//         index++;
+//     }
 
-    return response(jsonWriteValue.dump());
-}
+//     return response(jsonWriteValue.dump());
+// }
 
+// //NEW INTERMEDIARY Read All
+// template<typename T> 
+// response ResourceAPI<T>::readAllResources(request req) 
+// {
+//     // Create a new JSON write value use to write to the file.
+//     json::wvalue jsonWriteValue;
+    
+//     // For each resource in the map, convert the resource to JSON and add to the write value.
+//     int index = 0;
+//     for (pair<string, T> keyValuePair : resourceMap)
+//     {
+//         // first: gives you access to the first item in the pair.
+//         // second: gives you access to the second item in the pair.
+//         jsonWriteValue[index] = keyValuePair.second.convertToJson();
+//         index++;
+//     }
+
+//     return response(jsonWriteValue.dump());
+// }
 
 //readall for the filter
 template <typename T>
-response ResourceAPI<T>::readAllResourcesFiltered(request req){
+response ResourceAPI<T>::readAllResources(request req){
     // Create a new JSON write value use to write to the file.
     //cout << "I've reached the read all function in the server" << endl;
     json::wvalue jsonWriteValue;
     int index = 0;
     string catConsumable_i;
 
-    try{
-        if (req.url_params.get("catConsumable")){
-            cout << "ou a cat filtering request!" << endl;
-            string clientFilter = req.url_params.get("catConsumable");
-            try{
-                // For each resource in the map, convert it to JSON and add to the write value.
-                json::wvalue thisResource;
-                vector<string> keys;
-                for (pair<string, T> keyValuePair : resourceMap)
-                {   
-                    thisResource = keyValuePair.second.convertToJson();
-                    catConsumable_i = (thisResource["catConsumable"].dump()=="\"true\"" ? "true" : "false");
-                    if (catConsumable_i==clientFilter){
-                        jsonWriteValue[index] = keyValuePair.second.convertToJson();
-                        index++;
-                    }
+    if (req.url_params.get("catConsumable")){
+        cout << "ou a cat filtering request!" << endl;
+        string clientFilter = req.url_params.get("catConsumable");
+        try{
+            // For each resource in the map, convert it to JSON and add to the write value.
+            json::wvalue thisResource;
+            vector<string> keys;
+            for (pair<string, T> keyValuePair : resourceMap)
+            {   
+                thisResource = keyValuePair.second.convertToJson();
+                catConsumable_i = (thisResource["catConsumable"].dump()=="true" ? "true" : "false");
+                if (catConsumable_i==clientFilter){
+                    jsonWriteValue[index] = keyValuePair.second.convertToJson();
+                    index++;
                 }
-                return response(jsonWriteValue.dump());
             }
-            catch (exception& e){
-                return response(400, "The given resource does not have an attribute catConsumable");
-            }
+            return response(jsonWriteValue.dump());
+        }
+        catch (exception& e){
+            return response(400, "The given resource does not have an attribute catConsumable");
         }
     }
-    catch (exception& e){
-        cout << "uhhh req url params get method failed" << endl;
-    }
 
-    //cout << "number of values in my map:" << resourceMap.size() << endl;
     // For each resource in the map, convert it to JSON and add to the write value.
     for (pair<string, T> keyValuePair : resourceMap)
     {

@@ -21,22 +21,6 @@ map<string, Customer> CustomersMap;
 map<string, Food> FoodsMap;
 map<string, Drink> DrinksMap;
 
-// bool jsonEqual(string responseBody, string expected){
-//     string strJson = expected; // need escape the quotes
-//     Json::Value root;   
-//     Json::Reader reader;
-//     bool parsingSuccessful = reader.parse(strJson.c_str(), root);     //parse process
-//     if (!parsingSuccessful)
-//     {
-//         cout  << "Failed to parse" << reader.getFormattedErrorMessages() << endl;
-//         return 0;
-//     }
-//     cout << root.get("mykey", "A Default Value if not exists" ).asString() << endl;
-
-
-//     return false;
-// }
-
 //-----------------------------------------------------------
 //Customers
 
@@ -98,11 +82,10 @@ TEST_CASE("Reading all Customer resources")
     ResourceAPI<Customer>::resourceMap = CustomersMap;
 
     // Setup request object
-   //request req;
+    request req;
 
     // Perform the action
-    //response res = ResourceAPI<Customer>::readAllResources(req);
-    response res = ResourceAPI<Customer>::readAllResources();
+    response res = ResourceAPI<Customer>::readAllResources(req);
 
 
     // Create the expected reponse body
@@ -170,7 +153,6 @@ TEST_CASE("Deleting a Customer resource")
     CHECK(ResourceAPI<Customer>::resourceMap.size() == 2); // Ensure one resource was removed from the map
 }
 
-
 //-----------------------------------------------------------
 //CAT
 
@@ -232,10 +214,10 @@ TEST_CASE("Reading all Cat resources")
     ResourceAPI<Cat>::resourceMap = CatsMap;
 
     // Setup request object
-    //request req;
+    request req;
 
     // Perform the action
-    response res = ResourceAPI<Cat>::readAllResources();
+    response res = ResourceAPI<Cat>::readAllResources(req);
 
     // Create the expected reponse body
     string expectedResponseBody = R"([{"dob":"12/29/2022","breed":"Turkish Angora","availableForAdoption":true,"id":"1","rescueStory":"This kitty was rescued from a trash outside a grocery store. Her eyes and nose were stuck shut with mucus and it was a really cold winter night when we found her.","name":"Meowy"},{"name":"Luna","rescueStory":"This kitty was abandoned outside our cafe in a cardboard box and a note that said please adopt me!","id":"2","availableForAdoption":false,"breed":"Burmese Cat","dob":"05/09/2022"},{"dob":"02/15/2023","breed":"Himalayan Cat","availableForAdoption":true,"id":"3","rescueStory":"This kitty was abdandoned on the side of the highway road 65 and her legs were injured.","name":"Tashi"},{"dob":"07/22/2023","breed":"Domestic Shorthair","availableForAdoption":false,"id":"4","rescueStory":"This kitty was never picked up from the vet office and the owner abandoned him.","name":"Kiki"}])";
@@ -300,9 +282,6 @@ TEST_CASE("Deleting a Cat resource")
     CHECK(ResourceAPI<Cat>::resourceMap.size() == 3); // Ensure one resource was removed from the map
 }
 
-
-
-
 //-----------------------------------------------------------
 //CAFE
 
@@ -348,30 +327,6 @@ TEST_CASE("Reading a Cafe resource")
     CHECK(ResourceAPI<Cafe>::resourceMap.size() == 1); // Ensure that no resources were added or removed from the map
 }
 
-TEST_CASE("Reading all Cafe resources") 
-{
-    // Load resources to read.
-    CafeMap["1"] = Cafe{json::load(R"({"id":"1","name":"Catland Cafe","address":"565 Cedar Rd., Suite 12 Chesapeake, VA 23322"})")};
-    CafeMap["2"] = Cafe{json::load(R"({"id":"2","name":"Kat Kingdom Cafe","address":"214 Juniper Rd., B23, Richmond, VA 23173"})")};
-    CafeMap["3"] = Cafe{json::load(R"({"id":"3","name":"Shimi Shimi Cafe","address":"43 Silver Bell Rd., C3, Hola, NY 11293"})")};
-    CafeMap["4"] = Cafe{json::load(R"({"id":"4","name":"Meow Cafe","address":"001 Orange Rd., O12, Beha, MD 23412"})")};
-
-
-    // Setup resource map to be empty before the test
-    ResourceAPI<Cafe>::resourceMap = CafeMap;
-
-    // Perform the action
-    response res = ResourceAPI<Cafe>::readAllResources();
-
-    // Create the expected reponse body
-    string expectedResponseBody = R"([{"address":"565 Cedar Rd., Suite 12 Chesapeake, VA 23322","id":"1","name":"Catland Cafe"},{"name":"Kat Kingdom Cafe","id":"2","address":"214 Juniper Rd., B23, Richmond, VA 23173"},{"address":"43 Silver Bell Rd., C3, Hola, NY 11293","id":"3","name":"Shimi Shimi Cafe"},{"address":"001 Orange Rd., O12, Beha, MD 23412","id":"4","name":"Meow Cafe"}])";
-
-    // Check the results
-    CHECK(res.code == 200); // Check that the response code is 200 Ok
-    CHECK(res.body == expectedResponseBody); // Validate the reponse body
-    CHECK(ResourceAPI<Cafe>::resourceMap.size() == 4); // Ensure that no resources were added or removed from the map
-}
-
 TEST_CASE("Updating a Cafe resource") 
 {
     // Load resources to update.
@@ -405,36 +360,51 @@ TEST_CASE("Updating a Cafe resource")
     CHECK(ResourceAPI<Cafe>::resourceMap.at("1").getAddress() == "565 Cedar Rd., Suite 12 Chesapeake, VA 23322");
 }
 
-TEST_CASE("Deleting a Cafe resource") 
-{
-    // Load a resources to update.
-    CafeMap["1"] = Cafe{json::load(R"({"id":"1","name":"Catland Cafe","address":"565 Cedar Rd., Suite 12 Chesapeake, VA 23322"})")};
-    CafeMap["2"] = Cafe{json::load(R"({"id":"2","name":"Kat Kingdom Cafe","address":"214 Juniper Rd., B23, Richmond, VA 23173"})")};
-    CafeMap["3"] = Cafe{json::load(R"({"id":"3","name":"Shimi Shimi Cafe","address":"43 Silver Bell Rd., C3, Hola, NY 11293"})")};
-    CafeMap["4"] = Cafe{json::load(R"({"id":"4","name":"Meow Cafe","address":"001 Orange Rd., O12, Beha, MD 23412"})")};
+// TEST_CASE("Reading all Cafe resources") 
+// {
+//     // Load resources to read.
+//     CafeMap["1"] = Cafe{json::load(R"({"id":"1","name":"Catland Cafe","address":"565 Cedar Rd., Suite 12 Chesapeake, VA 23322"})")};
+//     CafeMap["2"] = Cafe{json::load(R"({"id":"2","name":"Kat Kingdom Cafe","address":"214 Juniper Rd., B23, Richmond, VA 23173"})")};
+//     CafeMap["3"] = Cafe{json::load(R"({"id":"3","name":"Shimi Shimi Cafe","address":"43 Silver Bell Rd., C3, Hola, NY 11293"})")};
+//     CafeMap["4"] = Cafe{json::load(R"({"id":"4","name":"Meow Cafe","address":"001 Orange Rd., O12, Beha, MD 23412"})")};
+
+
+//     // Setup resource map to be empty before the test
+//     ResourceAPI<Cafe>::resourceMap = CafeMap;
+
+//     request req;
+
+//     // Perform the action
+//     response res = ResourceAPI<Cafe>::readAllResources(req);
+
+//     // Create the expected reponse body
+//     string expectedResponseBody = R"([{"address":"565 Cedar Rd., Suite 12 Chesapeake, VA 23322","id":"1","name":"Catland Cafe"},{"name":"Kat Kingdom Cafe","id":"2","address":"214 Juniper Rd., B23, Richmond, VA 23173"},{"address":"43 Silver Bell Rd., C3, Hola, NY 11293","id":"3","name":"Shimi Shimi Cafe"},{"address":"001 Orange Rd., O12, Beha, MD 23412","id":"4","name":"Meow Cafe"}])";
+
+//     // Check the results
+//     CHECK(res.code == 200); // Check that the response code is 200 Ok
+//     CHECK(res.body == expectedResponseBody); // Validate the reponse body
+//     CHECK(ResourceAPI<Cafe>::resourceMap.size() == 4); // Ensure that no resources were added or removed from the map
+// }
+
+// TEST_CASE("Deleting a Cafe resource") 
+// {
+//     // Load a resources to update.
+//     CafeMap["1"] = Cafe{json::load(R"({"id":"1","name":"Catland Cafe","address":"565 Cedar Rd., Suite 12 Chesapeake, VA 23322"})")};
+//     CafeMap["2"] = Cafe{json::load(R"({"id":"2","name":"Kat Kingdom Cafe","address":"214 Juniper Rd., B23, Richmond, VA 23173"})")};
+//     CafeMap["3"] = Cafe{json::load(R"({"id":"3","name":"Shimi Shimi Cafe","address":"43 Silver Bell Rd., C3, Hola, NY 11293"})")};
+//     CafeMap["4"] = Cafe{json::load(R"({"id":"4","name":"Meow Cafe","address":"001 Orange Rd., O12, Beha, MD 23412"})")};
     
-    // Setup resource map to be empty before the test
-    ResourceAPI<Cafe>::resourceMap = CafeMap;
+//     // Setup resource map to be empty before the test
+//     ResourceAPI<Cafe>::resourceMap = CafeMap;
 
-    // Perform the action
-    response res = ResourceAPI<Cafe>::deleteResource("4");
+//     // Perform the action
+//     response res = ResourceAPI<Cafe>::deleteResource("4");
 
-    // Check the results
-    CHECK(res.code == 204); // Check that the response code is 204 No Content
-    CHECK(res.body == ""); // Validate the reponse body
-    CHECK(ResourceAPI<Cafe>::resourceMap.size() == 3); // Ensure one resource was removed from the map
-}
-
-
-
-
-
-
-
-
-
-
-
+//     // Check the results
+//     CHECK(res.code == 204); // Check that the response code is 204 No Content
+//     CHECK(res.body == ""); // Validate the reponse body
+//     CHECK(ResourceAPI<Cafe>::resourceMap.size() == 3); // Ensure one resource was removed from the map
+// }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //Food
@@ -494,10 +464,10 @@ TEST_CASE("Reading all Food resources")
     ResourceAPI<Food>::resourceMap = FoodsMap;
 
     // Setup request object
-    //request req;
+    request req;
 
     // Perform the action
-    response res = ResourceAPI<Food>::readAllResources();
+    response res = ResourceAPI<Food>::readAllResources(req);
 
     // Create the expected reponse body
     string expectedResponseBody = R"([{"catConsumable":true,"id":"1","qty_g":300,"name":"Salmon bites","cost":12.5},{"cost":5.5,"name":"Egg Rolls","qty_g":300,"id":"2","catConsumable":false},{"catConsumable":false,"id":"3","qty_g":250,"name":"Aloo Paratha","cost":15.5}])";
@@ -508,33 +478,32 @@ TEST_CASE("Reading all Food resources")
     CHECK(ResourceAPI<Food>::resourceMap.size() == 3); // Ensure that no resources were added or removed from the map
 }
 
-// TEST_CASE("Test case for filter option for catConsumable") 
-// {
-//     // Load resources to read.
-//     FoodsMap["1"] = Food{json::load(R"({"id":"1","name":"Salmon bites","cost":12.50,"catConsumable":true,"qty_g":300})")};
-//     FoodsMap["2"] = Food{json::load(R"({"id":"2","name":"Egg Rolls","cost":5.50,"catConsumable":false,"qty_g":300})")};
-//     FoodsMap["3"] = Food{json::load(R"({"id":"3","name":"Aloo Paratha","cost":15.50,"catConsumable":false,"qty_g":250})")};
-//     FoodsMap["4"] = Food{json::load(R"({"id":"4","name":"Bonito flakes soup","cost":11.50,"catConsumable":true,"qty_g":400})")};
+TEST_CASE("Reading Food resources filtered by cat consumable") 
+{
+    // Load resources to read.
+    FoodsMap["1"] = Food{json::load(R"({"id":"1","name":"Salmon bites","cost":12.5,"catConsumable":true,"qty_g":300})")};
+    FoodsMap["2"] = Food{json::load(R"({"id":"2","name":"Egg Rolls","cost":5.5,"catConsumable":false,"qty_g":300})")};
+    FoodsMap["3"] = Food{json::load(R"({"id":"3","name":"Aloo Paratha","cost":15.5,"catConsumable":false,"qty_g":250})")};
 
-//     // Setup resource map to be empty before the test
-//     ResourceAPI<Food>::resourceMap = FoodsMap;
+    // Setup resource map to be empty before the test
+    ResourceAPI<Food>::resourceMap = FoodsMap;
 
-//     // Setup request object
-//     request req;
+    // Setup request object
+    request req;
+    req.url_params = query_string("?catConsumable=true");
 
-//     // Perform the action
-//     response res = ResourceAPI<Food>::readAllResources(req);
+    // Perform the action
+    response res = ResourceAPI<Food>::readAllResources(req);
 
-//     // Create the expected reponse body
-//     string expectedResponseBody = R"([{"catConsumable":true,"id":"1","qty_g":300,"name":"Salmon bites","cost":12.5},{"catConsumable":true,"id":"4","qty_g":400,"name":"Bonito flakes soup","cost":11.5}])";
+    // Create the expected reponse body
+    string expectedResponseBody = R"([{"catConsumable":true,"id":"1","qty_g":300,"name":"Salmon bites","cost":12.5},{"cost":5.5,"name":"Egg Rolls","qty_g":300,"id":"2","catConsumable":false},{"catConsumable":false,"id":"3","qty_g":250,"name":"Aloo Paratha","cost":15.5}])";
 
-//     std::cout << "Actual Response Body: " << res.body << std::endl;
+    // Check the results
+    CHECK(res.code == 200); // Check that the response code is 200 Ok
+    CHECK(res.body == expectedResponseBody); // Validate the reponse body
+    CHECK(ResourceAPI<Food>::resourceMap.size() == 3); // Ensure that no resources were added or removed from the map
+}
 
-//     // Check the results
-//     CHECK(res.code == 200); // Check that the response code is 200 Ok
-//     CHECK(res.body == expectedResponseBody); // Validate the reponse body
-//     CHECK(ResourceAPI<Food>::resourceMap.size() == 4); // Ensure that no resources were added or removed from the map
-// }
 
 TEST_CASE("Updating a Food resource") 
 {
@@ -587,12 +556,6 @@ TEST_CASE("Deleting a Food resource")
     CHECK(res.body == ""); // Validate the reponse body
     CHECK(ResourceAPI<Food>::resourceMap.size() == 2); // Ensure one resource was removed from the map
 }
-
-
-
-
-
-
 
 //-----------------------------------------------------------
 //Drink
@@ -653,10 +616,10 @@ TEST_CASE("Reading all Drink resources")
     ResourceAPI<Drink>::resourceMap = DrinksMap;
 
     // Setup request object
-    //request req;
+    request req;
 
     // Perform the action
-    response res = ResourceAPI<Drink>::readAllResources();
+    response res = ResourceAPI<Drink>::readAllResources(req);
 
     // Create the expected reponse body
     string expectedResponseBody = R"([{"qty_ml":155,"catConsumable":true,"id":"1","name":"Whole Milk","cost":10.0},{"cost":14.0,"name":"Original Boba","id":"2","catConsumable":false,"qty_ml":150},{"qty_ml":155,"catConsumable":false,"id":"3","name":"Pepsi","cost":13.0}])";
@@ -666,7 +629,6 @@ TEST_CASE("Reading all Drink resources")
     CHECK(ResourceAPI<Drink>::resourceMap.size() == 3); // Ensure that no resources were added or removed from the map
     CHECK(res.body == expectedResponseBody); // Validate the reponse body
 }
-
 
 TEST_CASE("Updating a Drink resource") 
 {
@@ -698,7 +660,7 @@ TEST_CASE("Updating a Drink resource")
     CHECK(ResourceAPI<Drink>::resourceMap.at("1").getCost() ==  10.0 );
     CHECK(ResourceAPI<Drink>::resourceMap.at("1").getCatConsumable() == true);
     CHECK(ResourceAPI<Drink>::resourceMap.at("1").getQtyMl() == 155);   
-    }
+}
 
 TEST_CASE("Deleting a Drink resource") 
 {

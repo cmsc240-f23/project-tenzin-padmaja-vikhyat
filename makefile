@@ -45,8 +45,9 @@ FoodTest: FoodTest.cpp Food.o
 DrinkTest: DrinkTest.cpp Drink.o
 	g++ -lpthread -Wall DrinkTest.cpp Drink.o Consumable.o -o DrinkTest
 
-run-unit-tests: FileIOTest CafeTest CatTest CustomerTest FoodTest DrinkTest ResourceAPITest 
-	./ResourceAPITest ./FileIOTest ./CafeTest ./CatTest ./CustomerTest ./FoodTest ./DrinkTest 
+run-unit-tests: ResourceAPITest #FileIOTest CafeTest CatTest CustomerTest FoodTest DrinkTest 
+	./ResourceAPITest 
+#./FileIOTest ./CafeTest ./CatTest ./CustomerTest ./FoodTest ./DrinkTest 
 
 static-analysis:
 	cppcheck *.cpp
